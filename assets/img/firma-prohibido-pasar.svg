@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 220" role="img" aria-labelledby="title desc">
+  <title id="title">Prohibido pasar desapercibida</title>
+  <desc id="desc">Firma tipográfica oficial del catálogo Escándalo.</desc>
+  <g fill="#251018" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="60" font-weight="900" letter-spacing="-2">
+    <text x="20" y="82">PROHIBIDO PASAR</text>
+    <text x="20" y="150">PROHIBIDO PASAR</text>
+  </g>
+  <text x="765" y="154" fill="#251018" stroke="#251018" stroke-width="9" font-family="Georgia, Times New Roman, serif" font-size="108" font-style="italic" font-weight="900" letter-spacing="-6" textLength="880" lengthAdjust="spacingAndGlyphs">DESAPERCIBIDA</text>
+  <text x="753" y="143" fill="#fff8f3" stroke="#251018" stroke-width="6" paint-order="stroke fill" font-family="Georgia, Times New Roman, serif" font-size="108" font-style="italic" font-weight="900" letter-spacing="-6" textLength="880" lengthAdjust="spacingAndGlyphs">DESAPERCIBIDA</text>
+</svg>
