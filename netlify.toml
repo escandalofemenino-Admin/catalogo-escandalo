@@ -1,6 +1,19 @@
 [build]
   publish = "."
 
+# La raíz abre directo el catálogo (se conservan los ?utm_)
+[[redirects]]
+  from = "/"
+  to = "/catalogo.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/catalogo.html"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

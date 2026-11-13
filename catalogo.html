@@ -7,7 +7,8 @@
   <meta name="description" content="Catálogo oficial de Escándalo Boutique: conjuntos, athleisure y lencería. Compra por WhatsApp en Colombia.">
   <meta property="og:title" content="Escándalo Boutique · Catálogo oficial">
   <meta property="og:description" content="Hazte notar. Explora el catálogo esencial de Escándalo y pide tu look por WhatsApp.">
-  <meta property="og:image" content="assets/img/og-escandalo.jpg">
+  <meta property="og:image" content="https://catalogo-escandalo.netlify.app/assets/img/og-escandalo.jpg">
+  <meta property="og:url" content="https://catalogo-escandalo.netlify.app/catalogo.html">
   <meta property="og:type" content="website">
   <title>Catálogo · Escándalo Boutique</title>
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
@@ -21,8 +22,8 @@
       document.documentElement.classList.add("brand-intro-ready");
     }
   </script>
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/catalog-rebuild.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261112">
+  <link rel="stylesheet" href="assets/css/catalog-rebuild.css?v=20261112">
 </head>
 <body class="catalog-page catalog-rebuild">
   <a class="skip-link" href="#productos">Ir a los productos</a>
@@ -43,7 +44,7 @@
   </div>
 
   <header class="topbar" id="top">
-    <a class="brand-link" href="index.html" aria-label="Escándalo Boutique, inicio">
+    <a class="brand-link" href="#top" aria-label="Escándalo Boutique, volver arriba">
       <img src="assets/img/logo-horizontal-vino.svg" alt="Escándalo Boutique" width="180" height="60">
     </a>
     <nav class="topbar-actions" aria-label="Acciones principales">
@@ -59,12 +60,25 @@
         <span>Catálogo oficial de productos</span>
         <span>Entregas a todo Colombia</span>
       </div>
-      <div class="catalog-hero-title">
+      <div class="catalog-hero-title vibra-band">
         <h1 id="hero-title" class="hero-brand-title">
           <span class="sr-only">Vibra Alto</span>
           <img src="assets/img/vibra-alto-oficial.png" alt="" width="1920" height="1080">
         </h1>
-        <p>Vístete para que te miren.</p>
+        <div class="vibra-band-copy">
+          <p class="vibra-band-tagline">Vístete para que <em>te miren.</em></p>
+          <ul class="vibra-band-chips" aria-label="Lo que encuentras aquí">
+            <li>14 looks</li>
+            <li>Envíos a toda Colombia</li>
+            <li class="is-hot">Arma tu Dúo · −10%</li>
+          </ul>
+        </div>
+        <div class="vibra-ticker" aria-hidden="true">
+          <div class="vibra-ticker-track">
+            <span>Vibra alto</span><i>✦</i><span>Prohibido pasar desapercibida</span><i>✦</i><span>Arma tu Dúo con 10%</span><i>✦</i><span>Envíos a toda Colombia</span><i>✦</i><span>Pide por WhatsApp</span><i>✦</i>
+            <span>Vibra alto</span><i>✦</i><span>Prohibido pasar desapercibida</span><i>✦</i><span>Arma tu Dúo con 10%</span><i>✦</i><span>Envíos a toda Colombia</span><i>✦</i><span>Pide por WhatsApp</span><i>✦</i>
+          </div>
+        </div>
       </div>
       <div class="catalog-hero-gallery" aria-label="Looks de Escándalo Boutique">
         <a class="hero-look" href="#productos" aria-label="Ver Conjunto Dary en el catálogo">
@@ -252,7 +266,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/productos.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/productos.js?v=20261112"></script>
+  <script src="assets/js/app.js?v=20261112"></script>
 </body>
 </html>

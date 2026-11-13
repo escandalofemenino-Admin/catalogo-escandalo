@@ -71,7 +71,7 @@ El archivo `netlify.toml` agrega caché para imágenes y encabezados básicos de
 
 ## Archivos principales
 
-- `index.html`: registro y acceso.
+- `index.html`: redirige directo a `catalogo.html` (se quitó la pantalla de registro el 12 nov 2026; el registro VIP queda opcional dentro del catálogo).
 - `catalogo.html`: catálogo y flujo de compra.
 - `privacidad.html`: política de tratamiento de datos.
 - `assets/css/styles.css`: sistema visual responsive.

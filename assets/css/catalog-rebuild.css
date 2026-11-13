@@ -1944,3 +1944,192 @@ body.has-duo .floating-whatsapp, body.has-duo [data-whatsapp="button"] { bottom:
   .trust-cta .button { width: 100%; justify-content: space-between; }
 }
 .trust-promises, .trust-faq, .trust-cta { max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; }
+
+/* fix 12 nov · badge VIP sin desborde en móvil */
+@media (max-width: 640px) {
+  .catalog-rebuild .hero-lead-copy--vip { grid-template-columns: 1fr; row-gap: 8px; }
+  .catalog-rebuild .hero-lead-copy--vip > span {
+    grid-row: auto; justify-self: start; min-width: 0; min-height: 0;
+    padding: 6px 12px; font-size: 9px; white-space: nowrap;
+  }
+}
+
+/* ===== v3 · banda VIBRA ALTO (12 nov 2026) ===== */
+.catalog-rebuild .catalog-hero { height: auto; grid-template-rows: 34px auto minmax(360px, 1fr) auto 36px; }
+
+.catalog-rebuild .catalog-hero-title.vibra-band {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "logo copy" "ticker ticker";
+  align-items: center;
+  column-gap: clamp(20px, 4vw, 64px);
+  row-gap: 0;
+  padding: 18px calc(1vw + 22px) 0;
+  border-top: 1px solid var(--esc-line);
+  border-bottom: 1px solid var(--esc-line);
+  overflow: clip;
+  min-height: min-content;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(245, 143, 191, .55), transparent 55%),
+    radial-gradient(90% 120% at 100% 100%, rgba(249, 181, 211, .7), transparent 60%),
+    linear-gradient(100deg, #fde6f0 0%, #fff4f8 45%, #fbd9e8 100%);
+}
+
+.catalog-rebuild .vibra-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("../img/patron-escandalo.svg") center / 220px auto repeat;
+  opacity: .07;
+}
+
+.catalog-rebuild .vibra-band .hero-brand-title {
+  grid-area: logo;
+  position: relative;
+  width: clamp(260px, 34vw, 520px);
+  height: auto;
+  aspect-ratio: 520 / 120;
+  margin: 0 0 14px;
+}
+
+.catalog-rebuild .vibra-band .hero-brand-title img {
+  transform: scale(1.02);
+  filter: drop-shadow(0 6px 14px rgba(110, 18, 48, .18));
+}
+
+.catalog-rebuild .vibra-band-copy {
+  grid-area: copy;
+  position: relative;
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+  margin-bottom: 14px;
+  text-align: right;
+}
+
+.catalog-rebuild .vibra-band .vibra-band-kicker {
+  max-width: none;
+  margin: 0;
+  color: var(--esc-wine);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+
+.catalog-rebuild .vibra-band .vibra-band-tagline {
+  max-width: none;
+  margin: 0;
+  color: var(--esc-wine-dark);
+  font-family: var(--esc-serif);
+  font-size: clamp(22px, 2.4vw, 38px);
+  font-weight: 400;
+  letter-spacing: -.01em;
+  line-height: 1.05;
+  text-align: right;
+  text-transform: none;
+}
+
+.catalog-rebuild .vibra-band-tagline em {
+  color: var(--esc-wine);
+  font-style: italic;
+}
+
+.catalog-rebuild .vibra-band-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.catalog-rebuild .vibra-band-chips li {
+  padding: 6px 11px;
+  border: 1px solid rgba(110, 18, 48, .28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .6);
+  color: var(--esc-wine-dark);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.catalog-rebuild .vibra-band-chips li.is-hot {
+  border-color: var(--esc-wine);
+  background: var(--esc-wine);
+  color: #fff;
+}
+
+.catalog-rebuild .vibra-ticker {
+  grid-area: ticker;
+  position: relative;
+  margin-inline: calc(-1vw - 22px);
+  overflow: hidden;
+  background: var(--esc-wine);
+  color: var(--esc-pink-soft);
+}
+
+.catalog-rebuild .vibra-ticker-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 18px;
+  padding: 9px 0;
+  animation: vibra-marquee 32s linear infinite;
+}
+
+.catalog-rebuild .vibra-ticker span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.catalog-rebuild .vibra-ticker i {
+  color: var(--esc-pink);
+  font-style: normal;
+  font-size: 10px;
+}
+
+@keyframes vibra-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-rebuild .vibra-ticker-track { animation: none; }
+}
+
+@media (max-width: 760px) {
+  .catalog-rebuild .catalog-hero { height: auto; grid-template-rows: 28px auto minmax(330px, 50svh) auto 32px; }
+  .catalog-rebuild .catalog-hero-title.vibra-band {
+    grid-template-columns: 1fr;
+    grid-template-areas: "logo" "copy" "ticker";
+    justify-items: center;
+    padding: 16px 14px 0;
+  }
+  .catalog-rebuild .vibra-band .hero-brand-title {
+    width: min(86vw, 340px);
+    margin-bottom: 6px;
+  }
+  .catalog-rebuild .vibra-band-copy {
+    justify-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+  .catalog-rebuild .vibra-band .vibra-band-tagline {
+    font-size: 24px;
+    text-align: center;
+  }
+  .catalog-rebuild .vibra-band .vibra-band-kicker { font-size: 9px; letter-spacing: .2em; }
+  .catalog-rebuild .vibra-band-chips { justify-content: center; }
+  .catalog-rebuild .vibra-band-chips li { padding: 5px 9px; font-size: 8.5px; letter-spacing: .1em; }
+  .catalog-rebuild .vibra-ticker { margin-inline: -14px; }
+  .catalog-rebuild .vibra-ticker span { font-size: 9.5px; letter-spacing: .2em; }
+}
