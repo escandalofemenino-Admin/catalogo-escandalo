@@ -1989,7 +1989,7 @@ body.has-duo .floating-whatsapp, body.has-duo [data-whatsapp="button"] { bottom:
   position: relative;
   width: clamp(260px, 34vw, 520px);
   height: auto;
-  aspect-ratio: 520 / 120;
+  aspect-ratio: 1848 / 392;
   margin: 0 0 14px;
 }
 
@@ -2132,4 +2132,122 @@ body.has-duo .floating-whatsapp, body.has-duo [data-whatsapp="button"] { bottom:
   .catalog-rebuild .vibra-band-chips li { padding: 5px 9px; font-size: 8.5px; letter-spacing: .1em; }
   .catalog-rebuild .vibra-ticker { margin-inline: -14px; }
   .catalog-rebuild .vibra-ticker span { font-size: 9.5px; letter-spacing: .2em; }
+}
+
+/* ===== v3 · intro "flash" (12 nov 2026) ===== */
+.brand-intro-ready .catalog-rebuild .brand-intro.intro-v3 {
+  background: transparent;
+  transition: none;
+  transform: none;
+  cursor: pointer;
+}
+.catalog-rebuild .intro-v3 .iv-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5%;
+  background:
+    radial-gradient(120% 90% at 50% 100%, rgba(245, 143, 191, .18), transparent 60%),
+    var(--esc-wine);
+}
+.catalog-rebuild .intro-v3 .iv-panel--top { top: 0; }
+.catalog-rebuild .intro-v3 .iv-panel--bottom {
+  bottom: 0;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(245, 143, 191, .18), transparent 60%),
+    var(--esc-wine);
+}
+.catalog-rebuild .intro-v3 .iv-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+}
+.catalog-rebuild .intro-v3 .iv-frame {
+  position: relative;
+  width: min(58vw, 38vh);
+  aspect-ratio: 4 / 5;
+  opacity: 0;
+  box-shadow: 0 30px 80px rgba(20, 0, 8, .55);
+  outline: 1px solid rgba(249, 181, 211, .4);
+  outline-offset: 8px;
+}
+.catalog-rebuild .intro-v3 .iv-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+.catalog-rebuild .intro-v3 .iv-words {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: .02em;
+  margin: 0;
+  color: #fff;
+  font-family: var(--esc-serif);
+  font-size: clamp(54px, 11vw, 150px);
+  font-style: italic;
+  line-height: .9;
+  letter-spacing: -.02em;
+  text-align: center;
+  text-shadow: 0 8px 40px rgba(65, 9, 28, .6);
+  pointer-events: none;
+}
+.catalog-rebuild .intro-v3 .iv-words span { display: block; opacity: 0; }
+.catalog-rebuild .intro-v3 .iv-words span:nth-child(2) {
+  font-size: .5em;
+  font-style: normal;
+  letter-spacing: .02em;
+  color: var(--esc-pink-soft);
+}
+.catalog-rebuild .intro-v3 .iv-brand {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+.catalog-rebuild .intro-v3 .iv-vibra {
+  width: min(86vw, 640px);
+  height: auto;
+  opacity: 0;
+  filter: drop-shadow(0 18px 40px rgba(20, 0, 8, .5));
+}
+.catalog-rebuild .intro-v3 .iv-logo {
+  width: 150px;
+  height: auto;
+  opacity: 0;
+}
+.catalog-rebuild .intro-v3 .iv-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, #fff 0%, #fff6fa 40%, #f9b5d3 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.catalog-rebuild .intro-v3 .iv-skip {
+  position: absolute;
+  right: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 3;
+  padding: 10px 14px;
+  border: 1px solid rgba(249, 181, 211, .45);
+  border-radius: 999px;
+  background: rgba(65, 9, 28, .35);
+  color: var(--esc-pink-soft);
+  font: 600 12px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.catalog-rebuild .intro-v3 .iv-skip:focus-visible { outline: 2px solid var(--esc-pink); outline-offset: 3px; }
+
+/* banda del hero con el recorte liviano */
+.catalog-rebuild .vibra-band .hero-brand-title img {
+  object-fit: contain;
+  mix-blend-mode: normal;
+  transform: rotate(-2deg);
 }

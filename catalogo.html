@@ -13,34 +13,40 @@
   <title>Catálogo · Escándalo Boutique</title>
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="preload" href="assets/img/products/esc-11-01-card.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="preload" href="assets/img/vibra-alto-cut-sm.webp" as="image" type="image/webp">
   <script>
     try {
-      if (!matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("escandalo_brand_intro_v7")) {
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("escandalo_brand_intro_v8")) {
         document.documentElement.classList.add("brand-intro-ready");
       }
     } catch (_) {
       document.documentElement.classList.add("brand-intro-ready");
     }
   </script>
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261112">
-  <link rel="stylesheet" href="assets/css/catalog-rebuild.css?v=20261112">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261112b">
+  <link rel="stylesheet" href="assets/css/catalog-rebuild.css?v=20261112b">
 </head>
 <body class="catalog-page catalog-rebuild">
   <a class="skip-link" href="#productos">Ir a los productos</a>
 
-  <div class="brand-intro" id="brandIntro" aria-hidden="true">
-    <span class="brand-intro-ghost" aria-hidden="true">Escándalo</span>
-    <div class="brand-intro-inner">
-      <div class="brand-intro-meta">
-        <span>Catálogo oficial</span>
-        <span>Colombia · 2026</span>
+  <div class="brand-intro intro-v3" id="brandIntro">
+    <span class="iv-panel iv-panel--top" aria-hidden="true"></span>
+    <span class="iv-panel iv-panel--bottom" aria-hidden="true"></span>
+    <div class="iv-stage" aria-hidden="true">
+      <div class="iv-frame">
+        <img src="assets/img/products/esc-11-01-card.webp" alt="" width="480" height="600">
+        <img src="assets/img/products/esc-16-01-card.webp" alt="" width="480" height="600">
+        <img src="assets/img/products/esc-13-01-card.webp" alt="" width="480" height="600">
+        <img src="assets/img/products/esc-15-01-card.webp" alt="" width="480" height="600">
       </div>
-      <span class="brand-intro-rule" aria-hidden="true"></span>
-      <img class="brand-intro-logo" src="assets/img/logo-horizontal-vino.svg" alt="" width="180" height="60">
-      <img class="brand-intro-statement" src="assets/img/vibra-alto-oficial.png" alt="" width="1920" height="1080">
-      <p>Vístete para que te miren.</p>
+      <p class="iv-words"><span>Vístete</span><span>para que</span><span>te miren.</span></p>
+      <div class="iv-brand">
+        <img class="iv-vibra" src="assets/img/vibra-alto-cut-sm.webp" alt="" width="924" height="196">
+        <img class="iv-logo" src="assets/img/logo-horizontal-blanco.svg" alt="" width="180" height="34">
+      </div>
+      <span class="iv-flash"></span>
     </div>
-    <span class="brand-intro-curtain" aria-hidden="true"></span>
+    <button class="iv-skip" type="button">Saltar intro</button>
   </div>
 
   <header class="topbar" id="top">
@@ -63,7 +69,7 @@
       <div class="catalog-hero-title vibra-band">
         <h1 id="hero-title" class="hero-brand-title">
           <span class="sr-only">Vibra Alto</span>
-          <img src="assets/img/vibra-alto-oficial.png" alt="" width="1920" height="1080">
+          <img src="assets/img/vibra-alto-cut.webp" alt="" width="1848" height="392">
         </h1>
         <div class="vibra-band-copy">
           <p class="vibra-band-tagline">Vístete para que <em>te miren.</em></p>
@@ -266,7 +272,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/productos.js?v=20261112"></script>
-  <script src="assets/js/app.js?v=20261112"></script>
+  <script src="assets/js/productos.js?v=20261112b"></script>
+  <script src="assets/js/app.js?v=20261112b"></script>
 </body>
 </html>

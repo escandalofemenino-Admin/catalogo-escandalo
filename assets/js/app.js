@@ -589,22 +589,95 @@
 
   function setupBrandIntro() {
     const intro = $("#brandIntro");
-    if (!intro || !document.documentElement.classList.contains("brand-intro-ready")) return;
+    const root = document.documentElement;
+    if (!intro || !root.classList.contains("brand-intro-ready")) return;
     try {
-      sessionStorage.setItem("escandalo_brand_intro_v7", "true");
+      sessionStorage.setItem("escandalo_brand_intro_v8", "true");
     } catch (_) {
-      // La introducción sigue funcionando si el navegador bloquea storage.
+      // La intro funciona aunque el navegador bloquee storage.
     }
     document.body.classList.add("has-brand-intro");
-    requestAnimationFrame(() => intro.classList.add("is-active"));
-    setTimeout(() => {
-      intro.classList.add("is-leaving");
-      setTimeout(() => {
-        intro.hidden = true;
-        document.body.classList.remove("has-brand-intro");
-        document.documentElement.classList.remove("brand-intro-ready");
-      }, 520);
-    }, 560);
+
+    const finish = () => {
+      intro.hidden = true;
+      document.body.classList.remove("has-brand-intro");
+      root.classList.remove("brand-intro-ready");
+    };
+    if (typeof intro.animate !== "function") { finish(); return; }
+
+    const q = (sel) => intro.querySelector(sel);
+    const qa = (sel) => Array.from(intro.querySelectorAll(sel));
+    const ease = "cubic-bezier(.16, 1, .3, 1)";
+    const snap = "cubic-bezier(.76, 0, .24, 1)";
+    const running = [];
+    const play = (el, frames, opts) => {
+      if (!el) return null;
+      const a = el.animate(frames, Object.assign({ fill: "both" }, opts));
+      running.push(a);
+      return a;
+    };
+
+    // 1 · Ráfaga de flashes: las fotos se disparan como cámaras.
+    const frame = q(".iv-frame");
+    const photos = qa(".iv-frame img");
+    const flash = q(".iv-flash");
+    play(frame, [{ opacity: 0, transform: "scale(1.12) rotate(-2deg)" }, { opacity: 1, transform: "scale(1) rotate(-2deg)" }], { duration: 380, delay: 80, easing: ease });
+    photos.forEach((img, i) => {
+      const t = 120 + i * 190;
+      play(img, [{ opacity: 0 }, { opacity: 1, offset: .01 }, { opacity: 1, offset: .99 }, { opacity: 0 }], { duration: 190, delay: t, fill: i === photos.length - 1 ? "forwards" : "both" });
+      play(flash, [{ opacity: 0 }, { opacity: .5, offset: .25 }, { opacity: 0 }], { duration: 110, delay: t, fill: "none" });
+    });
+
+    // 2 · Las palabras entran con peso, una por golpe.
+    qa(".iv-words span").forEach((w, i) => {
+      play(w, [
+        { opacity: 0, transform: "translateY(60%) skewY(6deg)", clipPath: "inset(100% 0 0 0)" },
+        { opacity: 1, transform: "translateY(0) skewY(0)", clipPath: "inset(0 0 0 0)" }
+      ], { duration: 460, delay: 160 + i * 230, easing: ease });
+    });
+
+    // 3 · Gran flash y aterriza VIBRA ALTO.
+    const hit = 1000;
+    play(flash, [{ opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 0 }], { duration: 420, delay: hit - 40, fill: "none" });
+    play(frame, [{ opacity: 1 }, { opacity: 0 }], { duration: 120, delay: hit, fill: "forwards" });
+    play(q(".iv-words"), [{ opacity: 1 }, { opacity: 0 }], { duration: 120, delay: hit });
+    play(q(".iv-vibra"), [
+      { opacity: 0, transform: "scale(1.9) rotate(-9deg)" },
+      { opacity: 1, transform: "scale(.94) rotate(-3deg)", offset: .55 },
+      { opacity: 1, transform: "scale(1.02) rotate(-4deg)", offset: .8 },
+      { opacity: 1, transform: "scale(1) rotate(-4deg)" }
+    ], { duration: 640, delay: hit, easing: "cubic-bezier(.2, .9, .25, 1)" });
+    play(q(".iv-stage"), [
+      { transform: "translate(0, 0)" }, { transform: "translate(-6px, 4px)" }, { transform: "translate(5px, -3px)" },
+      { transform: "translate(-3px, 2px)" }, { transform: "translate(0, 0)" }
+    ], { duration: 260, delay: hit + 300, fill: "none" });
+    play(q(".iv-logo"), [{ opacity: 0, transform: "translateY(12px)", letterSpacing: ".2em" }, { opacity: 1, transform: "translateY(0)", letterSpacing: "0" }], { duration: 520, delay: hit + 420, easing: ease });
+
+    // 4 · Telón partido: la página aparece detrás.
+    const exitAt = 2050;
+    let done = false;
+    const exit = (now) => {
+      if (done) return;
+      done = true;
+      const d = now ? 0 : exitAt;
+      play(q(".iv-stage"), [{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.92)" }], { duration: 320, delay: d, easing: snap });
+      play(q(".iv-panel--top"), [{ transform: "translateY(0)" }, { transform: "translateY(-101%)" }], { duration: 640, delay: d + 140, easing: snap });
+      const last = play(q(".iv-panel--bottom"), [{ transform: "translateY(0)" }, { transform: "translateY(101%)" }], { duration: 640, delay: d + 140, easing: snap });
+      play(q(".iv-skip"), [{ opacity: 1 }, { opacity: 0 }], { duration: 160, delay: d });
+      const main = document.querySelector("main");
+      if (main) running.push(main.animate([{ transform: "scale(1.04)", opacity: .4 }, { transform: "scale(1)", opacity: 1 }], { duration: 760, delay: d + 140, easing: ease }));
+      last.finished.then(finish).catch(() => {});
+    };
+    exit(false);
+    const skip = q(".iv-skip");
+    const skipNow = () => {
+      running.forEach((a) => a.cancel());
+      running.length = 0;
+      done = false;
+      exit(true);
+    };
+    if (skip) skip.addEventListener("click", skipNow, { once: true });
+    intro.addEventListener("pointerdown", (e) => { if (e.target !== skip) skipNow(); }, { once: true });
   }
 
   function init() {
