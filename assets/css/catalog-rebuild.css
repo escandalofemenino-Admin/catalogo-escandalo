@@ -2251,3 +2251,53 @@ body.has-duo .floating-whatsapp, body.has-duo [data-whatsapp="button"] { bottom:
   mix-blend-mode: normal;
   transform: rotate(-2deg);
 }
+
+/* intro v3.1 · texto fuera del marco de fotos */
+.catalog-rebuild .intro-v3 .iv-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(26px, 4vh, 44px);
+  padding: 24px;
+}
+.catalog-rebuild .intro-v3 .iv-frame {
+  flex: none;
+  width: min(60vw, 36vh);
+}
+.catalog-rebuild .intro-v3 .iv-words {
+  position: static;
+  inset: auto;
+  display: grid;
+  gap: 2px;
+  font-size: clamp(46px, 13vw, 72px);
+  line-height: .95;
+  text-shadow: none;
+}
+.catalog-rebuild .intro-v3 .iv-words span:nth-child(2) {
+  font-size: .42em;
+  letter-spacing: .08em;
+  margin: 4px 0 2px;
+}
+.catalog-rebuild .intro-v3 .iv-words span:nth-child(3) { color: var(--esc-pink); }
+.catalog-rebuild .intro-v3 .iv-brand {
+  inset: 0;
+  place-content: center;
+}
+@media (min-width: 900px) {
+  .catalog-rebuild .intro-v3 .iv-stage {
+    flex-direction: row;
+    gap: clamp(48px, 6vw, 96px);
+  }
+  .catalog-rebuild .intro-v3 .iv-frame { width: min(30vw, 46vh); }
+  .catalog-rebuild .intro-v3 .iv-words {
+    justify-items: start;
+    text-align: left;
+    font-size: clamp(80px, 8.5vw, 132px);
+  }
+}
+.catalog-rebuild .intro-v3 .iv-words span:nth-child(2) { color: #fff; opacity: .85; }
+@media (min-width: 900px) {
+  .catalog-rebuild .intro-v3 .iv-logo { width: 200px; }
+  .catalog-rebuild .intro-v3 .iv-vibra { width: min(60vw, 760px); }
+}
