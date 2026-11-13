@@ -89,7 +89,7 @@ window.PRODUCTOS_ESCANDALO = [
   },
   {
     codigo: "ESC-07",
-    nombre: "Conjunto Miu Miu",
+    nombre: "Conjunto Milán",
     linea: "athleisure",
     lineaNombre: "Sport Escándalo",
     detalle: "Contraste urbano para moverte con estilo.",
@@ -117,7 +117,7 @@ window.PRODUCTOS_ESCANDALO = [
   },
   {
     codigo: "ESC-09",
-    nombre: "Conjunto Alo",
+    nombre: "Conjunto Aura",
     linea: "athleisure",
     lineaNombre: "Sport Escándalo",
     detalle: "Energía deportiva con una silueta que estiliza.",
