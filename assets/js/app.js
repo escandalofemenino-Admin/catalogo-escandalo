@@ -231,7 +231,7 @@
           <p class="product-size-note">${sizeNote}</p>
           <div class="card-actions">
             <button class="card-cta" type="button" data-open="${product.codigo}">
-              <span>Ver y pedir</span><span class="card-cta-icon" aria-hidden="true">→</span>
+              <span>Ver y pedir</span><span class="card-cta-icon" aria-hidden="true"><svg class="kiss" viewBox="0 0 1230 789" aria-hidden="true" focusable="false"><use class="lip-up" href="#lab-up"/><use class="lip-low" href="#lab-low"/></svg></span>
             </button>
             <button class="card-duo" type="button" data-card-duo="${product.codigo}" aria-label="Agregar ${product.nombre} a mi Dúo" title="Agregar a mi Dúo">
               <span aria-hidden="true">＋</span><small>Dúo</small>
@@ -483,7 +483,7 @@
           </div>
           <div class="dialog-actions">
             <button class="button button--wine button--wide order-button order-button--dialog" type="button" data-dialog-buy>
-              <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.08 4.85 4.85 0 0 0 1.02 2.58c.12.16 1.77 2.7 4.29 3.79 1.6.69 2.22.75 3.02.63.49-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>Pedir por WhatsApp</span><span class="order-button-icon" aria-hidden="true">→</span>
+              <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.08 4.85 4.85 0 0 0 1.02 2.58c.12.16 1.77 2.7 4.29 3.79 1.6.69 2.22.75 3.02.63.49-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>Pedir por WhatsApp</span><span class="order-button-icon" aria-hidden="true"><svg class="kiss" viewBox="0 0 1230 789" aria-hidden="true" focusable="false"><use class="lip-up" href="#lab-up"/><use class="lip-low" href="#lab-low"/></svg></span>
             </button>
             <button class="button button--outline-wine button--wide dialog-duo-add" type="button" data-dialog-duo>＋ Agregar a mi Dúo <small>(2 prendas con ${Math.round(CONFIG.duoDiscount * 100)}%)</small></button>
             <button class="size-guide-button" type="button" data-size-guide>Ver guía de tallas</button>
@@ -592,21 +592,34 @@
     const phone = $("#catalogPhone");
     const consent = $("#catalogConsent");
     const error = $("#catalogLeadError");
-    phone.addEventListener("input", () => { phone.value = normalizePhone(phone.value); });
+    const formatPhone = (value) => {
+      const d = normalizePhone(value);
+      return [d.slice(0, 3), d.slice(3, 6), d.slice(6, 10)].filter(Boolean).join(" ");
+    };
+    phone.addEventListener("input", () => {
+      phone.value = formatPhone(phone.value);
+      error.textContent = "";
+      form.classList.toggle("is-valid", validPhone(phone.value));
+    });
+    consent.addEventListener("change", () => { error.textContent = ""; });
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (!validPhone(phone.value)) {
-        error.textContent = "Escribe un celular colombiano válido de 10 dígitos.";
+        error.textContent = "Revisa tu número: son 10 dígitos y empieza por 3.";
+        phone.focus();
         return;
       }
       if (!consent.checked) {
-        error.textContent = "Acepta la política para guardar tu número.";
+        error.textContent = "Marca la casilla para poder escribirte.";
         return;
       }
-      await saveLead(phone.value);
-      lead.hidden = true;
-      if (registeredMeta) registeredMeta.hidden = false;
-      showToast("Ya estás en la lista. Bienvenida a Escándalo.");
+      form.classList.add("is-sending");
+      await saveLead(normalizePhone(phone.value));
+      form.hidden = true;
+      const done = $(".vip2-done", lead);
+      if (done) done.hidden = false;
+      lead.classList.add("is-done");
+      showToast("Ya estás en la lista. Bienvenida a Escándalo 💋");
     });
   }
 
@@ -743,8 +756,34 @@
     select(tabs[0]);
   }
 
+  function loadLipsSprite() {
+    if (document.getElementById("lab-up")) return;
+    fetch("assets/img/labios.svg?v=1")
+      .then((response) => (response.ok ? response.text() : ""))
+      .then((svg) => {
+        if (!svg) return;
+        const holder = document.createElement("div");
+        holder.innerHTML = svg;
+        document.body.prepend(holder.firstElementChild);
+      })
+      .catch(() => {});
+  }
+
+  function setupKissMotion() {
+    document.addEventListener("pointerdown", (event) => {
+      const button = event.target.closest(".card-cta, .order-button--dialog, .vip2-submit");
+      if (!button) return;
+      button.classList.remove("is-kissing");
+      void button.offsetWidth;
+      button.classList.add("is-kissing");
+      setTimeout(() => button.classList.remove("is-kissing"), 600);
+    });
+  }
+
   function init() {
     setupBrandIntro();
+    loadLipsSprite();
+    setupKissMotion();
     setupWhatsAppLinks();
     setupTrustTabs();
     setupLeadGate();

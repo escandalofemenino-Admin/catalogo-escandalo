@@ -24,7 +24,7 @@
     }
   </script>
   <link rel="stylesheet" href="assets/css/styles.css?v=20261120d">
-  <link rel="stylesheet" href="assets/css/catalog-rebuild.css?v=20261120e">
+  <link rel="stylesheet" href="assets/css/catalog-rebuild.css?v=20261120f">
 </head>
 <body class="catalog-page catalog-rebuild">
   <a class="skip-link" href="#productos">Ir a los productos</a>
@@ -125,28 +125,37 @@
           <span><b>05</b> Ayari</span>
         </a>
       </div>
-      <section class="hero-lead" id="heroLead" aria-labelledby="heroLeadTitle" hidden>
-        <div class="hero-lead-copy hero-lead-copy--vip">
-          <span>VIP Escandalosas</span>
-          <strong id="heroLeadTitle">Entra antes. Elige primero.</strong>
-          <div class="vip-benefits" aria-label="Beneficios del acceso VIP">
-            <span>Acceso anticipado a nuevos looks</span>
-            <span>Referencias nuevas antes que nadie</span>
-            <span>Asesoría directa para elegir tu talla</span>
+      <section class="hero-lead vip2" id="heroLead" aria-labelledby="heroLeadTitle" hidden>
+        <div class="vip2-copy">
+          <span class="vip2-mark" aria-hidden="true"><svg class="kiss" viewBox="0 0 1230 789" aria-hidden="true" focusable="false"><use class="lip-up" href="#lab-up"/><use class="lip-low" href="#lab-low"/></svg></span>
+          <div>
+            <p class="vip2-kicker">Lista VIP Escandalosas</p>
+            <h2 id="heroLeadTitle" class="vip2-title">Entra antes. <em>Elige primero.</em></h2>
+            <ul class="vip2-benefits" aria-label="Beneficios del acceso VIP">
+              <li>Looks nuevos antes que nadie</li>
+              <li>Acceso anticipado a lanzamientos</li>
+              <li>Asesoría personal por WhatsApp</li>
+            </ul>
           </div>
         </div>
-        <form id="catalogLeadForm" class="hero-lead-form" novalidate>
-          <div class="phone-field phone-field--light">
-            <span aria-hidden="true">+57</span>
-            <input id="catalogPhone" inputmode="numeric" autocomplete="tel-national" maxlength="10" aria-label="Número de WhatsApp" required>
+        <form id="catalogLeadForm" class="vip2-form" novalidate>
+          <label class="vip2-label" for="catalogPhone">Tu número de WhatsApp</label>
+          <div class="vip2-field">
+            <span class="vip2-prefix" aria-hidden="true">🇨🇴 +57</span>
+            <input id="catalogPhone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="12" placeholder="300 000 0000" aria-describedby="catalogLeadError" required>
+            <button class="vip2-submit" type="submit"><span>Quiero ser VIP</span><svg class="kiss" viewBox="0 0 1230 789" aria-hidden="true" focusable="false"><use class="lip-up" href="#lab-up"/><use class="lip-low" href="#lab-low"/></svg></button>
           </div>
-          <button class="button button--wine btn-pill btn-vip" type="submit"><span>Quiero ser VIP</span><span aria-hidden="true">→</span></button>
-          <label class="consent-field consent-field--dark">
+          <label class="vip2-consent">
             <input type="checkbox" id="catalogConsent" required>
+            <span class="vip2-check" aria-hidden="true"></span>
             <span>Acepto recibir novedades por WhatsApp según la <a href="privacidad.html">política de privacidad</a>.</span>
           </label>
-          <p class="field-error field-error--dark" id="catalogLeadError" role="alert"></p>
+          <p class="vip2-error" id="catalogLeadError" role="alert"></p>
         </form>
+        <div class="vip2-done" hidden>
+          <span class="vip2-mark" aria-hidden="true"><svg class="kiss" viewBox="0 0 1230 789" aria-hidden="true" focusable="false"><use class="lip-up" href="#lab-up"/><use class="lip-low" href="#lab-low"/></svg></span>
+          <p><strong>Ya estás en la lista VIP.</strong> Te escribimos por WhatsApp cuando llegue lo nuevo.</p>
+        </div>
       </section>
       <div class="catalog-hero-footer" id="heroRegisteredMeta">
         <span>15 looks disponibles</span>
@@ -263,7 +272,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/productos.js?v=20261120d"></script>
-  <script src="assets/js/app.js?v=20261120d"></script>
+  <script src="assets/js/productos.js?v=20261120f"></script>
+  <script src="assets/js/app.js?v=20261120f"></script>
 </body>
 </html>

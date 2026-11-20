@@ -2657,3 +2657,232 @@ body.has-duo .floating-whatsapp, body.has-duo [data-whatsapp="button"] { bottom:
   .catalog-rebuild .chip-badge { height: 24px; padding: 0 7px; font-size: 10px; }
   .catalog-rebuild .chip-arrow { width: 22px; height: 22px; }
 }
+
+/* ===== labios Escándalo como ícono con motion ===== */
+.catalog-rebuild .kiss { display: block; width: 100%; height: auto; fill: currentColor; overflow: visible; }
+.catalog-rebuild .kiss use { transform-box: fill-box; transform-origin: 50% 50%; transition: transform .25s ease; }
+.catalog-rebuild .card-cta-icon,
+.catalog-rebuild .order-button--dialog .order-button-icon {
+  display: grid;
+  place-items: center;
+  padding: 0 7px;
+  color: var(--esc-wine-dark);
+}
+.catalog-rebuild .card-cta-icon .kiss { width: 22px; }
+.catalog-rebuild .order-button--dialog .order-button-icon .kiss { width: 24px; }
+/* hover: los labios se entreabren */
+.catalog-rebuild .card-cta:hover .lip-up,
+.catalog-rebuild .order-button--dialog:hover .lip-up { transform: translateY(-9%) rotate(-2deg); }
+.catalog-rebuild .card-cta:hover .lip-low,
+.catalog-rebuild .order-button--dialog:hover .lip-low { transform: translateY(9%) rotate(1.5deg); }
+.catalog-rebuild .card-cta:hover .card-cta-icon,
+.catalog-rebuild .order-button--dialog:hover .order-button-icon { transform: none; }
+/* al tocar: beso */
+@keyframes kiss-pop {
+  0% { transform: scale(1); }
+  30% { transform: scale(.78); }
+  60% { transform: scale(1.22) rotate(-6deg); }
+  100% { transform: scale(1); }
+}
+@keyframes lip-close-up { 0%, 100% { transform: none; } 30% { transform: translateY(14%); } }
+@keyframes lip-close-low { 0%, 100% { transform: none; } 30% { transform: translateY(-14%); } }
+.catalog-rebuild .card-cta:active .kiss,
+.catalog-rebuild .order-button--dialog:active .kiss,
+.catalog-rebuild .is-kissing .kiss { animation: kiss-pop .5s cubic-bezier(.3, 1.4, .5, 1); }
+.catalog-rebuild .card-cta:active .lip-up,
+.catalog-rebuild .is-kissing .lip-up { animation: lip-close-up .5s ease; }
+.catalog-rebuild .card-cta:active .lip-low,
+.catalog-rebuild .is-kissing .lip-low { animation: lip-close-low .5s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .catalog-rebuild .kiss, .catalog-rebuild .kiss use { animation: none !important; transition: none !important; }
+}
+@media (max-width: 520px) {
+  .catalog-rebuild .card-cta-icon { display: grid; width: 30px; height: 30px; padding: 0 6px; }
+  .catalog-rebuild .card-cta-icon .kiss { width: 18px; }
+  .catalog-rebuild .card-cta { justify-content: space-between; gap: 6px; padding: 0 4px 0 12px; font-size: 10px; letter-spacing: .03em; }
+  .catalog-rebuild .card-duo { width: 40px; }
+  .catalog-rebuild .card-duo small { display: none; }
+}
+
+/* ===== VIP v2 ===== */
+.catalog-rebuild .hero-lead.vip2:not([hidden]) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(20px, 4vw, 56px);
+  align-items: center;
+  padding: clamp(22px, 3vw, 34px) clamp(20px, 4vw, 48px);
+  background:
+    radial-gradient(80% 140% at 0% 0%, rgba(245, 143, 191, .22), transparent 60%),
+    radial-gradient(60% 120% at 100% 100%, rgba(245, 143, 191, .14), transparent 60%),
+    var(--esc-wine);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.catalog-rebuild .vip2::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/patron-escandalo.svg") center / 260px auto repeat;
+  opacity: .05;
+  pointer-events: none;
+}
+.catalog-rebuild .vip2 > * { position: relative; z-index: 1; }
+.catalog-rebuild .vip2-copy { display: flex; align-items: center; gap: 18px; }
+.catalog-rebuild .vip2-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--esc-pink);
+  color: var(--esc-wine);
+  box-shadow: 0 0 0 6px rgba(245, 143, 191, .18);
+  animation: vip-breathe 3.2s ease-in-out infinite;
+}
+.catalog-rebuild .vip2-mark .kiss { width: 38px; }
+@keyframes vip-breathe { 50% { box-shadow: 0 0 0 12px rgba(245, 143, 191, .06); } }
+.catalog-rebuild .vip2-kicker {
+  margin: 0 0 4px;
+  color: var(--esc-pink);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.catalog-rebuild .vip2-title {
+  margin: 0 0 10px;
+  color: #fff;
+  font-family: var(--esc-serif);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.02em;
+  text-transform: none;
+}
+.catalog-rebuild .vip2-title em { color: var(--esc-pink-soft); }
+.catalog-rebuild .vip2-benefits { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0; padding: 0; list-style: none; }
+.catalog-rebuild .vip2-benefits li { position: relative; padding-left: 18px; color: rgba(255, 255, 255, .82); font-size: 13px; }
+.catalog-rebuild .vip2-benefits li::before { content: "✦"; position: absolute; left: 0; color: var(--esc-pink); font-size: 11px; top: 1px; }
+
+.catalog-rebuild .vip2-form { display: grid; gap: 10px; }
+.catalog-rebuild .vip2-label { color: rgba(255, 255, 255, .85); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+.catalog-rebuild .vip2-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 18px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(20, 0, 8, .35);
+  transition: box-shadow .2s;
+}
+.catalog-rebuild .vip2-field:focus-within { box-shadow: 0 0 0 4px rgba(245, 143, 191, .55), 0 14px 34px rgba(20, 0, 8, .35); }
+.catalog-rebuild .vip2-prefix {
+  flex: none;
+  padding-right: 10px;
+  border-right: 1px solid var(--esc-line);
+  color: var(--esc-wine);
+  font-size: 15px;
+  font-weight: 800;
+}
+.catalog-rebuild .vip2-field input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--esc-wine-dark);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+.catalog-rebuild .vip2-field input::placeholder { color: rgba(110, 18, 48, .3); }
+.catalog-rebuild .vip2-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  height: 50px;
+  padding: 0 10px 0 22px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f7a1c9, var(--esc-pink));
+  color: var(--esc-wine-dark);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform .15s, filter .2s;
+}
+.catalog-rebuild .vip2-submit .kiss { width: 30px; color: var(--esc-wine); }
+.catalog-rebuild .vip2-submit:hover { transform: translateY(-1px); filter: brightness(1.04); }
+.catalog-rebuild .vip2-submit:hover .lip-up { transform: translateY(-9%) rotate(-2deg); }
+.catalog-rebuild .vip2-submit:hover .lip-low { transform: translateY(9%) rotate(1.5deg); }
+.catalog-rebuild .vip2-submit:active .kiss { animation: kiss-pop .5s cubic-bezier(.3, 1.4, .5, 1); }
+.catalog-rebuild .vip2-submit:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.catalog-rebuild .vip2-form.is-valid .vip2-submit { box-shadow: 0 0 0 3px rgba(255, 255, 255, .55); }
+
+.catalog-rebuild .vip2-consent {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(255, 255, 255, .78);
+  font-size: 12px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+.catalog-rebuild .vip2-consent input { position: absolute; opacity: 0; width: 20px; height: 20px; margin: 0; }
+.catalog-rebuild .vip2-check {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(249, 181, 211, .8);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  transition: background .2s;
+}
+.catalog-rebuild .vip2-consent input:checked + .vip2-check { background: var(--esc-pink); border-color: var(--esc-pink); }
+.catalog-rebuild .vip2-consent input:checked + .vip2-check::after { content: "✓"; color: var(--esc-wine-dark); font-size: 13px; font-weight: 900; }
+.catalog-rebuild .vip2-consent input:focus-visible + .vip2-check { outline: 3px solid #fff; outline-offset: 2px; }
+.catalog-rebuild .vip2-consent a { color: #fff; }
+.catalog-rebuild .vip2-error { min-height: 0; margin: 0; color: var(--esc-pink-soft); font-size: 13px; font-weight: 700; }
+.catalog-rebuild .vip2-error:empty { display: none; }
+.catalog-rebuild .vip2-done:not([hidden]) {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .08);
+}
+.catalog-rebuild .vip2-done .vip2-mark { width: 52px; height: 52px; animation: kiss-pop .6s cubic-bezier(.3, 1.4, .5, 1); }
+.catalog-rebuild .vip2-done .vip2-mark .kiss { width: 30px; }
+.catalog-rebuild .vip2-done p { margin: 0; color: rgba(255, 255, 255, .85); font-size: 14px; line-height: 1.5; }
+.catalog-rebuild .vip2-done strong { display: block; color: #fff; font-family: var(--esc-serif); font-size: 22px; font-weight: 400; }
+
+@media (max-width: 860px) {
+  .catalog-rebuild .hero-lead.vip2:not([hidden]) { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .catalog-rebuild .vip2-copy { align-items: flex-start; gap: 14px; }
+  .catalog-rebuild .vip2-mark { width: 48px; height: 48px; }
+  .catalog-rebuild .vip2-mark .kiss { width: 28px; }
+  .catalog-rebuild .vip2-title { font-size: 28px; }
+  .catalog-rebuild .vip2-benefits { flex-direction: column; gap: 4px; }
+  .catalog-rebuild .vip2-field { flex-wrap: wrap; border-radius: 22px; padding: 6px; }
+  .catalog-rebuild .vip2-prefix { padding-left: 10px; }
+  .catalog-rebuild .vip2-field input { height: 46px; font-size: 17px; }
+  .catalog-rebuild .vip2-submit { width: 100%; justify-content: center; height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .catalog-rebuild .vip2-mark { animation: none; }
+}
+@media (max-width: 520px) {
+  .catalog-rebuild .card-duo small { display: block; font-size: 7.5px; letter-spacing: .04em; }
+}
