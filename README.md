@@ -99,4 +99,4 @@ Altas: ESC-21 Karla ($59.900), ESC-22 Sofía ($94.900), ESC-23 Bianca ($59.900),
 Retiradas: ESC-07 Milán/Miu Miu, ESC-10 María y ESC-13 México; códigos y fotos se conservan como historial.
 ESC-03 y ESC-04: negro, rojo, blanco. Pocahontas: negro, camel, marfil, rosado, azul bebé.
 Ocho fotos generadas; Karla y Bianca se presentan sin modelo.
-Regla: los nombres de producto, descripciones y textos alternativos no usan nombres de otras marcas (riesgo de rechazo en Meta y WhatsApp Business). La tercera foto es un detalle de referencia y la ficha lo indica. Solo se usa en ESC-11, 12, 14, 15, 16, 22 y 24; los acercamientos de ESC-01, 03, 04, 06, 08, 09, 21 y 23 mostraban logos de otras marcas y quedaron fuera del catálogo.
+Regla: los nombres de producto, descripciones y textos alternativos no usan nombres de otras marcas (riesgo de rechazo en Meta y WhatsApp Business). La tercera foto es un detalle de referencia y la ficha lo indica. Todas las referencias activas tienen detalle; en ESC-01, 03, 04, 06, 08, 09, 21 y 23 el acercamiento se recortó para dejar fuera los logos de otras marcas (los originales están en 05_PRODUCTOS/Detalles generados fuera del catalogo).
