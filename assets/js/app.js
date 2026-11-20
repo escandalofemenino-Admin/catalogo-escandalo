@@ -23,7 +23,7 @@
   const lineOrder = { pantalon: 0, athleisure: 1, sexys: 2, swim: 3 };
   const productos = (window.PRODUCTOS_ESCANDALO || [])
     .filter((product) => product.activo)
-    .sort((a, b) => (lineOrder[a.linea] ?? 9) - (lineOrder[b.linea] ?? 9));
+    .sort((a, b) => (a.precio ?? Infinity) - (b.precio ?? Infinity) || (lineOrder[a.linea] ?? 9) - (lineOrder[b.linea] ?? 9) || a.nombre.localeCompare(b.nombre, "es"));
 
   function money(value) {
     return value == null ? "Precio por confirmar" : `$${new Intl.NumberFormat("es-CO").format(value)}`;
