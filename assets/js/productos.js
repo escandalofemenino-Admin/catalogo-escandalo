@@ -10,7 +10,7 @@ window.PRODUCTOS_ESCANDALO = [
     tallaUnica: true,
     foto1: "assets/img/products/esc-21-01",
     foto2: "assets/img/products/esc-21-02",
-    foto3: "assets/img/products/esc-21-03",
+    foto3: "assets/img/products/esc-21-03-textura",
     alt: "Conjunto Karla negro con elásticos rojos",
     etiqueta: "",
     activo: true
@@ -43,7 +43,7 @@ window.PRODUCTOS_ESCANDALO = [
     tallaUnica: true,
     foto1: "assets/img/products/esc-23-01",
     foto2: "assets/img/products/esc-23-02",
-    foto3: "assets/img/products/esc-23-03",
+    foto3: "assets/img/products/esc-23-03-textura",
     alt: "Conjunto Bianca negro de top strapless y tanga con bordes blancos",
     etiqueta: "",
     activo: true
@@ -77,7 +77,7 @@ window.PRODUCTOS_ESCANDALO = [
     tallaUnica: true,
     foto1: "assets/img/products/esc-01-01",
     foto2: "assets/img/products/esc-01-02",
-    foto3: "assets/img/products/esc-01-03",
+    foto3: "assets/img/products/esc-01-03-textura",
     alt: "Top triangular y tanga de encaje negro",
     etiqueta: "",
     activo: true
@@ -109,7 +109,7 @@ window.PRODUCTOS_ESCANDALO = [
     tallaUnica: true,
     foto1: "assets/img/products/esc-03-01",
     foto2: "assets/img/products/esc-03-02",
-    foto3: "assets/img/products/esc-03-03",
+    foto3: "assets/img/products/esc-03-03-textura",
     alt: "Camiseta crop negra y tanga con bandas claras",
     etiqueta: "",
     activo: true
@@ -126,7 +126,7 @@ window.PRODUCTOS_ESCANDALO = [
     tallaUnica: true,
     foto1: "assets/img/products/esc-04-01",
     foto2: "assets/img/products/esc-04-02",
-    foto3: "assets/img/products/esc-04-03",
+    foto3: "assets/img/products/esc-04-03-textura",
     alt: "Camibuso crop negro de manga larga y tanga",
     etiqueta: "",
     activo: true
@@ -159,7 +159,7 @@ window.PRODUCTOS_ESCANDALO = [
     tallaNota: "S/M",
     foto1: "assets/img/products/esc-06-01",
     foto2: "assets/img/products/esc-06-02",
-    foto3: "assets/img/products/esc-06-03",
+    foto3: "assets/img/products/esc-06-03-textura",
     alt: "Conjunto gris de camibuso crop y pantalón",
     etiqueta: "",
     activo: true
@@ -192,7 +192,7 @@ window.PRODUCTOS_ESCANDALO = [
     tallaNota: "S/M",
     foto1: "assets/img/products/esc-08-01",
     foto2: "assets/img/products/esc-08-02",
-    foto3: "assets/img/products/esc-08-03",
+    foto3: "assets/img/products/esc-08-03-textura",
     alt: "Conjunto de tres piezas en blanco y negro",
     etiqueta: "",
     activo: true
@@ -209,7 +209,7 @@ window.PRODUCTOS_ESCANDALO = [
     tallaNota: "S/M",
     foto1: "assets/img/products/esc-09-01",
     foto2: "assets/img/products/esc-09-02",
-    foto3: "assets/img/products/esc-09-03",
+    foto3: "assets/img/products/esc-09-03-textura",
     alt: "Top deportivo negro y pantalón negro amplio",
     etiqueta: "",
     activo: true
