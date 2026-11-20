@@ -215,7 +215,7 @@
 
   function card(product) {
     const priceClass = product.precio == null ? " product-price--pending" : "";
-    const sizeNote = product.tallaUnica ? "Talla única" : "Tallas S · M · L";
+    const sizeNote = sizeLabel(product);
     return `
       <article class="product-card product-card--v2" data-line="${product.linea}" data-code="${product.codigo}">
         <button class="product-media" type="button" data-open="${product.codigo}" aria-label="Ver detalles de ${product.nombre}">
@@ -229,9 +229,14 @@
           <h3>${product.nombre}</h3>
           <p class="product-price${priceClass}">${money(product.precio)}</p>
           <p class="product-size-note">${sizeNote}</p>
-          <button class="button button--wine order-button card-open" type="button" data-open="${product.codigo}">
-            <span>Ver y pedir</span><span class="order-button-icon" aria-hidden="true">↗</span>
-          </button>
+          <div class="card-actions">
+            <button class="card-cta" type="button" data-open="${product.codigo}">
+              <span>Ver y pedir</span><span class="card-cta-icon" aria-hidden="true">→</span>
+            </button>
+            <button class="card-duo" type="button" data-card-duo="${product.codigo}" aria-label="Agregar ${product.nombre} a mi Dúo" title="Agregar a mi Dúo">
+              <span aria-hidden="true">＋</span><small>Dúo</small>
+            </button>
+          </div>
         </div>
       </article>`;
   }
@@ -323,6 +328,24 @@
     observeReveals();
 
     $$(".filter").forEach((filter) => {
+      const line = filter.dataset.filter;
+      const total = line === "all" ? productos.length : productos.filter((product) => product.linea === line).length;
+      if (!total && line !== "all") { filter.hidden = true; return; }
+      filter.insertAdjacentHTML("beforeend", ` <span class="filter-count">${total}</span>`);
+    });
+
+    grid.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-card-duo]");
+      if (!button) return;
+      const product = findProduct(button.dataset.cardDuo);
+      if (!product) return;
+      addToDuo(product, productSizes(product)[0]);
+      button.classList.remove("is-added");
+      void button.offsetWidth;
+      button.classList.add("is-added");
+    });
+
+    $$(".filter").forEach((filter) => {
       filter.addEventListener("click", () => {
         $$(".filter").forEach((item) => {
           const selected = item === filter;
@@ -383,7 +406,13 @@
   }
 
   function productSizes(product) {
-    return product.tallaUnica ? ["Única"] : ["S", "M", "L"];
+    if (product.tallaUnica) return [product.tallaNota ? `Única ${product.tallaNota}` : "Única"];
+    return ["S", "M", "L"];
+  }
+
+  function sizeLabel(product) {
+    if (product.tallaUnica) return product.tallaNota ? `Talla única · ajusta ${product.tallaNota}` : "Talla única";
+    return "Tallas S · M · L";
   }
 
   function sizePicker(product, name = "product-size", compact = false) {
@@ -454,7 +483,7 @@
           </div>
           <div class="dialog-actions">
             <button class="button button--wine button--wide order-button order-button--dialog" type="button" data-dialog-buy>
-              <span>Pedir por WhatsApp</span><span class="order-button-icon" aria-hidden="true">↗</span>
+              <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.08 4.85 4.85 0 0 0 1.02 2.58c.12.16 1.77 2.7 4.29 3.79 1.6.69 2.22.75 3.02.63.49-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>Pedir por WhatsApp</span><span class="order-button-icon" aria-hidden="true">→</span>
             </button>
             <button class="button button--outline-wine button--wide dialog-duo-add" type="button" data-dialog-duo>＋ Agregar a mi Dúo <small>(2 prendas con ${Math.round(CONFIG.duoDiscount * 100)}%)</small></button>
             <button class="size-guide-button" type="button" data-size-guide>Ver guía de tallas</button>
@@ -690,9 +719,34 @@
     intro.addEventListener("pointerdown", (e) => { if (e.target !== skip) skipNow(); }, { once: true });
   }
 
+  function setupTrustTabs() {
+    const tabs = $$("[data-trust-tab]");
+    if (!tabs.length) return;
+    const select = (tab) => {
+      tabs.forEach((item) => {
+        const on = item === tab;
+        item.setAttribute("aria-selected", String(on));
+        item.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(item.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+      });
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => select(tab));
+      tab.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+        const next = tabs[(i + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length];
+        select(next);
+        next.focus();
+      });
+    });
+    select(tabs[0]);
+  }
+
   function init() {
     setupBrandIntro();
     setupWhatsAppLinks();
+    setupTrustTabs();
     setupLeadGate();
     retryQueue();
     if ($("#productGrid")) {

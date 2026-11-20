@@ -100,3 +100,10 @@ Retiradas: ESC-07 Milán/Miu Miu, ESC-10 María y ESC-13 México; códigos y fot
 ESC-03 y ESC-04: negro, rojo, blanco. Pocahontas: negro, camel, marfil, rosado, azul bebé.
 Ocho fotos generadas; Karla y Bianca se presentan sin modelo.
 Regla: los nombres de producto, descripciones y textos alternativos no usan nombres de otras marcas (riesgo de rechazo en Meta y WhatsApp Business). La tercera foto es un detalle de referencia y la ficha lo indica. Todas las referencias activas tienen detalle; en ESC-01, 03, 04, 06, 08, 09, 21 y 23 el acercamiento se recortó para dejar fuera los logos de otras marcas (los originales están en 05_PRODUCTOS/Detalles generados fuera del catalogo).
+
+## Ajustes · 20 nov 2026 (tarde)
+
+- Tallas: los sets de pantalón y Sport Escándalo son talla única que ajusta a S/M (`tallaNota: "S/M"` en `productos.js`); los conjuntos con tanga son talla única.
+- Sin etiqueta "Nuevo" en ningún producto.
+- Tarjetas con botón "Ver y pedir" y botón rápido "+ Dúo" (agrega al Dúo sin abrir la ficha). Filtros con contador.
+- Sección "Sin vueltas. Contigo." compacta: 4 pasos, CTA a WhatsApp y preguntas en pestañas (Tallas, Envíos, Pagos, Cambios).

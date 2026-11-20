@@ -23,8 +23,8 @@
       document.documentElement.classList.add("brand-intro-ready");
     }
   </script>
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261120b">
-  <link rel="stylesheet" href="assets/css/catalog-rebuild.css?v=20261119">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261120d">
+  <link rel="stylesheet" href="assets/css/catalog-rebuild.css?v=20261120d">
 </head>
 <body class="catalog-page catalog-rebuild">
   <a class="skip-link" href="#productos">Ir a los productos</a>
@@ -56,7 +56,7 @@
     <nav class="topbar-actions" aria-label="Acciones principales">
       <a class="catalog-nav-link" href="#productos">Catálogo</a>
       <a class="instagram-link" href="https://www.instagram.com/escandalo.femenino/" target="_blank" rel="noopener" aria-label="Instagram de Escándalo Boutique">Instagram</a>
-      <a class="button button--wine button--compact" data-whatsapp="general" href="#">Pedir <span aria-hidden="true">↗</span></a>
+      <a class="button button--wine button--compact btn-pill" data-whatsapp="general" href="#"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.08 4.85 4.85 0 0 0 1.02 2.58c.12.16 1.77 2.7 4.29 3.79 1.6.69 2.22.75 3.02.63.49-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>Pedir</span></a>
     </nav>
   </header>
 
@@ -138,7 +138,7 @@
             <span aria-hidden="true">+57</span>
             <input id="catalogPhone" inputmode="numeric" autocomplete="tel-national" maxlength="10" aria-label="Número de WhatsApp" required>
           </div>
-          <button class="button button--wine" type="submit">Quiero ser VIP <span aria-hidden="true">→</span></button>
+          <button class="button button--wine btn-pill btn-vip" type="submit"><span>Quiero ser VIP</span><span aria-hidden="true">→</span></button>
           <label class="consent-field consent-field--dark">
             <input type="checkbox" id="catalogConsent" required>
             <span>Acepto recibir novedades por WhatsApp según la <a href="privacidad.html">política de privacidad</a>.</span>
@@ -170,64 +170,53 @@
       <div class="product-grid" id="productGrid" aria-live="polite"></div>
     </section>
 
-    <section class="trust-section trust-v2" aria-labelledby="trust-title">
-      <header class="section-heading section-heading--light reveal">
-        <div>
-          <p class="eyebrow">Compra acompañada, de verdad</p>
-          <h2 id="trust-title">Sin vueltas.<br><em>Contigo.</em></h2>
+    <section class="trust-section trust-v3" aria-labelledby="trust-title">
+      <div class="tv3-intro reveal">
+        <h2 id="trust-title">Sin vueltas.<br><em>Contigo.</em></h2>
+        <p>Una asesora real te confirma disponibilidad, pago y envío antes de que pagues.</p>
+        <ol class="tv3-steps" aria-label="Así compras">
+          <li><b>1</b><span><strong>Elige tu look</strong>Mira las fotos y abre la ficha.</span></li>
+          <li class="is-duo"><b>2</b><span><strong>Arma tu Dúo</strong>Dos prendas, 10% menos.</span></li>
+          <li><b>3</b><span><strong>Pídelo por WhatsApp</strong>Tu pedido llega completo.</span></li>
+          <li><b>4</b><span><strong>Recíbelo en casa</strong>Envíos a toda Colombia.</span></li>
+        </ol>
+        <div class="tv3-cta">
+          <a class="cta-whatsapp" data-whatsapp="general" href="#">
+            <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.08 4.85 4.85 0 0 0 1.02 2.58c.12.16 1.77 2.7 4.29 3.79 1.6.69 2.22.75 3.02.63.49-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+            <span>Hablar con una asesora</span>
+          </a>
+          <a class="cta-ghost" href="#productos">Armar mi Dúo</a>
         </div>
-        <p>Tú eliges, nosotras nos encargamos del resto. Una asesora real te responde por WhatsApp y confirma contigo talla, disponibilidad, pago y envío antes de que pagues.</p>
-      </header>
-      <div class="trust-grid">
-        <article class="trust-card reveal">
-          <span>01</span>
-          <h3>Elige tu look</h3>
-          <p>Abre la ficha, mira las dos fotos y elige talla y cantidad.</p>
-        </article>
-        <article class="trust-card trust-card--duo reveal">
-          <span>02</span>
-          <h3>Arma tu Dúo</h3>
-          <p>Suma dos prendas y llévalas con 10% en un solo pedido. Opcional, pero vale la pena.</p>
-        </article>
-        <article class="trust-card reveal">
-          <span>03</span>
-          <h3>Pídelo por WhatsApp</h3>
-          <p>Tu mensaje llega con el pedido completo y te respondemos con disponibilidad y total.</p>
-        </article>
-        <article class="trust-card reveal">
-          <span>04</span>
-          <h3>Recíbelo en tu ciudad</h3>
-          <p>Envíos a toda Colombia. Coordinamos contigo el pago y la entrega.</p>
-        </article>
       </div>
-      <ul class="trust-promises reveal" aria-label="Lo que te prometemos">
-        <li><b>💬</b> Asesora real, no un bot</li>
-        <li><b>✓</b> Confirmas todo antes de pagar</li>
-        <li><b>📦</b> Envíos a toda Colombia</li>
-        <li><b>💋</b> Empaque de marca Escándalo</li>
-      </ul>
-      <div class="trust-faq reveal">
-        <p class="eyebrow">Preguntas que nos hacen</p>
-        <details>
-          <summary>¿Cómo sé cuál es mi talla?</summary>
-          <p>Los sets de pantalón y Sport Escándalo vienen en tallas S, M y L; los conjuntos con tanga son talla única. En cada ficha tienes la guía de tallas y, si tienes dudas, escríbenos tus medidas y te decimos cuál te queda mejor.</p>
-        </details>
-        <details>
-          <summary>¿Cuánto cuesta el envío?</summary>
+
+      <div class="tv3-help reveal">
+        <ul class="tv3-promises" aria-label="Lo que te prometemos">
+          <li>Asesora real, no un bot</li>
+          <li>Confirmas antes de pagar</li>
+          <li>Empaque Escándalo</li>
+        </ul>
+        <div class="tv3-tabs" role="tablist" aria-label="Preguntas frecuentes">
+          <button type="button" role="tab" id="tab-talla" aria-controls="panel-talla" aria-selected="true" data-trust-tab>Tallas</button>
+          <button type="button" role="tab" id="tab-envio" aria-controls="panel-envio" aria-selected="false" data-trust-tab>Envíos</button>
+          <button type="button" role="tab" id="tab-pago" aria-controls="panel-pago" aria-selected="false" data-trust-tab>Pagos</button>
+          <button type="button" role="tab" id="tab-cambio" aria-controls="panel-cambio" aria-selected="false" data-trust-tab>Cambios</button>
+        </div>
+        <div class="tv3-panel" role="tabpanel" id="panel-talla" aria-labelledby="tab-talla">
+          <strong>Talla única, pensada para S y M.</strong>
+          <p>Los sets de pantalón y Sport Escándalo ajustan a tallas S y M. Los conjuntos con tanga son talla única. ¿Dudas? Mándanos tus medidas y te decimos cómo te queda.</p>
+        </div>
+        <div class="tv3-panel" role="tabpanel" id="panel-envio" aria-labelledby="tab-envio" hidden>
+          <strong>Enviamos a toda Colombia.</strong>
           <p>El envío lo paga la clienta y depende de tu ciudad. Te damos el valor exacto antes de confirmar el pedido.</p>
-        </details>
-        <details>
-          <summary>¿Cómo pago?</summary>
-          <p>Cuando confirmamos tu pedido te enviamos por WhatsApp las formas de pago disponibles. No pagas nada hasta tener todo claro.</p>
-        </details>
-        <details>
-          <summary>¿Puedo cambiar una prenda?</summary>
-          <p>Sí. Los vestidos de baño y la ropa íntima, por higiene, solo tienen cambio por defecto de fábrica.</p>
-        </details>
-      </div>
-      <div class="trust-cta reveal">
-        <a class="button button--cream" data-whatsapp="general" href="#">Hablar con una asesora <span aria-hidden="true">↗</span></a>
-        <a class="trust-cta-link" href="#productos">Armar mi Dúo <span aria-hidden="true">↑</span></a>
+        </div>
+        <div class="tv3-panel" role="tabpanel" id="panel-pago" aria-labelledby="tab-pago" hidden>
+          <strong>Pagas cuando todo está claro.</strong>
+          <p>Al confirmar tu pedido te enviamos por WhatsApp las formas de pago disponibles. No pagas nada antes.</p>
+        </div>
+        <div class="tv3-panel" role="tabpanel" id="panel-cambio" aria-labelledby="tab-cambio" hidden>
+          <strong>Sí, puedes cambiar.</strong>
+          <p>Los vestidos de baño y la ropa íntima, por higiene, solo tienen cambio por defecto de fábrica.</p>
+        </div>
       </div>
     </section>
 
@@ -243,7 +232,7 @@
         <p class="eyebrow">Tu look. Tu actitud.</p>
         <h2 id="closing-title">Hazlo<br><em>Escándalo.</em></h2>
         <p>Ya elegiste. Ahora déjanos acompañarte a pedirlo sin vueltas.</p>
-        <a class="button button--cream" data-whatsapp="general" href="#">Quiero mi look <span aria-hidden="true">↗</span></a>
+        <a class="button button--cream btn-pill" data-whatsapp="general" href="#"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.08 4.85 4.85 0 0 0 1.02 2.58c.12.16 1.77 2.7 4.29 3.79 1.6.69 2.22.75 3.02.63.49-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>Quiero mi look</span></a>
         <div class="closing-contact">
           <a href="https://www.instagram.com/escandalo.femenino/" target="_blank" rel="noopener">@escandalo.femenino</a>
           <a data-whatsapp="general" href="#">304 642 5299</a>
@@ -272,7 +261,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/productos.js?v=20261120c"></script>
-  <script src="assets/js/app.js?v=20261120c"></script>
+  <script src="assets/js/productos.js?v=20261120d"></script>
+  <script src="assets/js/app.js?v=20261120d"></script>
 </body>
 </html>
