@@ -365,7 +365,11 @@
       if (event.pointerType === "touch") return;
       const media = event.target.closest(".product-media");
       if (!media || media.contains(event.relatedTarget)) return;
-      loadSecondary(media).then(() => media.classList.add("is-hovered"));
+      loadSecondary(media).then(() => {
+        if (media.matches(":hover") && $(".product-image--secondary", media)?.naturalWidth) {
+          media.classList.add("is-hovered");
+        }
+      });
     });
     grid.addEventListener("pointerout", (event) => {
       const media = event.target.closest(".product-media");
