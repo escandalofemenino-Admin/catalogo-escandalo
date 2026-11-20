@@ -425,12 +425,15 @@
     const dialog = $("#productDialog");
     const content = $("#dialogContent");
     if (!product || !dialog || !content) return;
+    const images = [...new Set([product.foto1, product.foto2, product.foto3].filter(Boolean))];
     content.innerHTML = `
       <div class="dialog-layout">
         <div class="dialog-gallery">
           ${picture(product.foto1, product.alt, "dialog-image", "eager")}
-          <div class="gallery-nav" ${product.foto1 === product.foto2 ? "hidden" : ""}>
+          <p class="gallery-note" data-gallery-note hidden>Detalle de referencia</p>
+          <div class="gallery-nav" ${images.length < 2 ? "hidden" : ""}>
             <button type="button" data-gallery="prev" aria-label="Foto anterior">←</button>
+            <span class="gallery-count" data-gallery-count aria-live="polite">1 / ${images.length}</span>
             <button type="button" data-gallery="next" aria-label="Foto siguiente">→</button>
           </div>
         </div>
@@ -441,6 +444,7 @@
           <p class="dialog-description">${product.descripcion}</p>
           <ul class="dialog-detail-list">
             <li><span>Incluye</span><strong>${product.detalle.split(" · ")[0]}</strong></li>
+            ${product.colores?.length ? `<li><span>Colores disponibles</span><strong>${product.colores.join(" · ")}</strong></li>` : ""}
             <li><span>Entrega</span><strong>Envíos a Colombia</strong></li>
             <li><span>Asesoría</span><strong>Por WhatsApp</strong></li>
           </ul>
@@ -465,12 +469,16 @@
     let imageIndex = 0;
     const image = $(".dialog-image", content);
     const sourceElement = $(".dialog-gallery source", content);
-    const images = [product.foto1, product.foto2];
+    const count = $("[data-gallery-count]", content);
+    const note = $("[data-gallery-note]", content);
     const showImage = (index) => {
       imageIndex = (index + images.length) % images.length;
       image.classList.remove("is-zoomed");
       image.src = `${images[imageIndex]}.jpg`;
       sourceElement.srcset = `${images[imageIndex]}.webp`;
+      image.alt = images[imageIndex] === product.foto3 ? `${product.nombre}: detalle de tela y costuras` : imageIndex === 0 ? product.alt : `${product.alt}, vista de producto`;
+      count.textContent = `${imageIndex + 1} / ${images.length}`;
+      if (note) note.hidden = images[imageIndex] !== product.foto3;
     };
     $$('[data-gallery]', content).forEach((button) => {
       button.addEventListener("click", () => showImage(imageIndex + (button.dataset.gallery === "next" ? 1 : -1)));
@@ -512,6 +520,8 @@
     });
 
     dialog.showModal();
+    dialog.scrollTop = 0;
+    requestAnimationFrame(() => { dialog.scrollTop = 0; });
     document.body.classList.add("is-locked");
     if (focusSize && productSizes(product).length > 1) {
       setTimeout(() => $('input[name="product-size"]', content)?.focus(), 0);

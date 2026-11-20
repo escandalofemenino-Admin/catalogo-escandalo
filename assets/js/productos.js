@@ -1,13 +1,76 @@
 window.PRODUCTOS_ESCANDALO = [
   {
+    codigo: "ESC-21",
+    nombre: "Conjunto Karla",
+    linea: "sexys",
+    lineaNombre: "Lencería",
+    detalle: "Top + tanga",
+    descripcion: "Top de tirantes anchos y espalda deportiva, con tanga a juego. Negro con bandas elásticas en contraste rojo.",
+    precio: 59900,
+    tallaUnica: true,
+    foto1: "assets/img/products/esc-21-01",
+    foto2: "assets/img/products/esc-21-02",
+    alt: "Conjunto Karla negro con elásticos rojos",
+    etiqueta: "Nuevo",
+    activo: true
+  },
+  {
+    codigo: "ESC-22",
+    nombre: "Conjunto Sofía",
+    linea: "athleisure",
+    lineaNombre: "Sport Escándalo",
+    detalle: "Ombliguera + mochos",
+    descripcion: "Ombliguera sin mangas con escote V y dos botones, acompañada de mochos tipo bermuda de tiro alto. Foto en rosado; consulta los colores disponibles.",
+    precio: 94900,
+    tallaUnica: true,
+    foto1: "assets/img/products/esc-22-01",
+    foto2: "assets/img/products/esc-22-02",
+    foto3: "assets/img/products/esc-22-03",
+    alt: "Conjunto Sofía rosado de ombliguera y bermuda",
+    etiqueta: "Nuevo",
+    activo: true
+  },
+  {
+    codigo: "ESC-23",
+    nombre: "Conjunto Bianca",
+    linea: "sexys",
+    lineaNombre: "Lencería",
+    detalle: "Top strapless + tanga",
+    descripcion: "Top strapless y tanga negros con bordes blancos y bandas elásticas en contraste.",
+    precio: 59900,
+    tallaUnica: true,
+    foto1: "assets/img/products/esc-23-01",
+    foto2: "assets/img/products/esc-23-02",
+    alt: "Conjunto Bianca negro de top strapless y tanga con bordes blancos",
+    etiqueta: "Nuevo",
+    activo: true
+  },
+  {
+    codigo: "ESC-24",
+    nombre: "Conjunto Pocahontas",
+    linea: "pantalon",
+    lineaNombre: "Sets de pantalón",
+    detalle: "Top halter + pantalón",
+    descripcion: "Top halter de escote V con doble ajuste de hebillas en cintura y pantalón de pierna amplia. Foto en azul bebé.",
+    colores: ["Negro", "Camel", "Marfil", "Rosado", "Azul bebé"],
+    precio: 119900,
+    tallaUnica: true,
+    foto1: "assets/img/products/esc-24-01",
+    foto2: "assets/img/products/esc-24-02",
+    foto3: "assets/img/products/esc-24-03",
+    alt: "Conjunto Pocahontas azul bebé con top halter y pantalón amplio",
+    etiqueta: "Nuevo",
+    activo: true
+  },
+  {
     codigo: "ESC-01",
     nombre: "Tanga + Top Encaje",
     linea: "sexys",
     lineaNombre: "Lencería",
     detalle: "Encaje que insinúa, actitud que se nota.",
-    tallaUnica: true,
     descripcion: "Bralette triangular y tanga en encaje negro, con tiras finas y bandas elásticas anchas.",
     precio: 49900,
+    tallaUnica: true,
     foto1: "assets/img/products/esc-01-01",
     foto2: "assets/img/products/esc-01-02",
     alt: "Top triangular y tanga de encaje negro",
@@ -20,9 +83,9 @@ window.PRODUCTOS_ESCANDALO = [
     linea: "sexys",
     lineaNombre: "Lencería",
     detalle: "Sin fotografía disponible",
-    tallaUnica: true,
     descripcion: "Referencia pendiente de producción fotográfica.",
     precio: 49900,
+    tallaUnica: true,
     foto1: null,
     foto2: null,
     alt: "",
@@ -35,9 +98,10 @@ window.PRODUCTOS_ESCANDALO = [
     linea: "sexys",
     lineaNombre: "Lencería",
     detalle: "Comodidad ceñida con un punto atrevido.",
-    tallaUnica: true,
     descripcion: "Camiseta crop negra de manga corta y tanga a juego con bandas claras de contraste.",
+    colores: ["Negro", "Rojo", "Blanco"],
     precio: 69900,
+    tallaUnica: true,
     foto1: "assets/img/products/esc-03-01",
     foto2: "assets/img/products/esc-03-02",
     alt: "Camiseta crop negra y tanga con bandas claras",
@@ -50,9 +114,10 @@ window.PRODUCTOS_ESCANDALO = [
     linea: "sexys",
     lineaNombre: "Lencería",
     detalle: "Manga larga, silueta corta y mucha actitud.",
-    tallaUnica: true,
     descripcion: "Camibuso crop negro de manga larga y tanga a juego con bandas negras de contraste.",
+    colores: ["Negro", "Rojo", "Blanco"],
     precio: 75000,
+    tallaUnica: true,
     foto1: "assets/img/products/esc-04-01",
     foto2: "assets/img/products/esc-04-02",
     alt: "Camibuso crop negro de manga larga y tanga",
@@ -99,7 +164,7 @@ window.PRODUCTOS_ESCANDALO = [
     foto2: "assets/img/products/esc-07-02",
     alt: "Camiseta crop blanca y pantalón negro amplio",
     etiqueta: "",
-    activo: true
+    activo: false
   },
   {
     codigo: "ESC-08",
@@ -141,7 +206,7 @@ window.PRODUCTOS_ESCANDALO = [
     foto2: "assets/img/products/esc-10-02",
     alt: "Top negro con cierre y pantalón índigo de bota ancha",
     etiqueta: "",
-    activo: true
+    activo: false
   },
   {
     codigo: "ESC-11",
@@ -153,6 +218,7 @@ window.PRODUCTOS_ESCANDALO = [
     precio: 94900,
     foto1: "assets/img/products/esc-11-01",
     foto2: "assets/img/products/esc-11-02",
+    foto3: "assets/img/products/esc-11-03",
     alt: "Modelo con conjunto Dary color chocolate",
     etiqueta: "",
     activo: true
@@ -167,6 +233,7 @@ window.PRODUCTOS_ESCANDALO = [
     precio: 104900,
     foto1: "assets/img/products/esc-12-01",
     foto2: "assets/img/products/esc-12-02",
+    foto3: "assets/img/products/esc-12-03",
     alt: "Modelo con conjunto Melania beige",
     etiqueta: "",
     activo: true
@@ -183,7 +250,7 @@ window.PRODUCTOS_ESCANDALO = [
     foto2: "assets/img/products/esc-13-02",
     alt: "Modelo con conjunto México blanco",
     etiqueta: "",
-    activo: true
+    activo: false
   },
   {
     codigo: "ESC-14",
@@ -195,6 +262,7 @@ window.PRODUCTOS_ESCANDALO = [
     precio: 109900,
     foto1: "assets/img/products/esc-14-01",
     foto2: "assets/img/products/esc-14-02",
+    foto3: "assets/img/products/esc-14-03",
     alt: "Modelo con conjunto Ayari color camel",
     etiqueta: "",
     activo: true
@@ -209,6 +277,7 @@ window.PRODUCTOS_ESCANDALO = [
     precio: 114900,
     foto1: "assets/img/products/esc-15-01",
     foto2: "assets/img/products/esc-15-02",
+    foto3: "assets/img/products/esc-15-03",
     alt: "Modelo con conjunto Melody color vino",
     etiqueta: "",
     activo: true
@@ -223,6 +292,7 @@ window.PRODUCTOS_ESCANDALO = [
     precio: 114900,
     foto1: "assets/img/products/esc-16-01",
     foto2: "assets/img/products/esc-16-02",
+    foto3: "assets/img/products/esc-16-03",
     alt: "Modelo con conjunto María Clara rosado",
     etiqueta: "",
     activo: true

@@ -4,7 +4,8 @@ Sitio estático mobile-first. Se puede abrir con doble clic en `index.html` o pu
 
 ## Estado del catálogo
 
-- 14 referencias oficiales visibles con precio.
+- 15 referencias visibles con precio y tres fotografías por referencia · actualización del 20 de noviembre de 2026.
+- La tercera vista (`foto3`) muestra un acercamiento de tela y costuras generado a partir de la imagen del producto. La galería incluye contador y navegación circular.
 - Las cinco referencias Swim permanecen guardadas con `activo: false` para una futura publicación.
 - ESC-02 y ESC-05 están en `assets/js/productos.js` con `activo: false` porque no hay fotografía en la carpeta del proyecto.
 - Precios oficiales tomados de `Escandalo_Tabla_Precios_v4.xlsx`.
@@ -91,3 +92,11 @@ El archivo `netlify.toml` agrega caché para imágenes y encabezados básicos de
 - Pega la URL de Apps Script en `leadEndpoint`. Sin ella, los registros se quedan solo en el navegador de cada clienta.
 - Cuando tengas el dominio, cambia `og:image` en `index.html` y `catalogo.html` por la URL completa (por ejemplo `https://tudominio.com/assets/img/og-escandalo.jpg`) y agrega `<meta property="og:url" content="https://tudominio.com/">`. Sin la URL completa, WhatsApp no muestra la imagen al compartir el link.
 - Hosting recomendado: Cloudflare Pages (gratis, sin límite de tráfico). Workers & Pages → Create → Pages → Upload assets y arrastra la carpeta.
+
+## Portafolio · 19 nov 2026
+
+Altas: ESC-21 Karla ($59.900), ESC-22 Sofía ($94.900), ESC-23 Bianca ($59.900), ESC-24 Pocahontas ($119.900). Todas talla única.
+Retiradas: ESC-07 Milán/Miu Miu, ESC-10 María y ESC-13 México; códigos y fotos se conservan como historial.
+ESC-03 y ESC-04: negro, rojo, blanco. Pocahontas: negro, camel, marfil, rosado, azul bebé.
+Ocho fotos generadas; Karla y Bianca se presentan sin modelo.
+Regla: los nombres de producto, descripciones y textos alternativos no usan nombres de otras marcas (riesgo de rechazo en Meta y WhatsApp Business). La tercera foto es un detalle de referencia y la ficha lo indica. Solo se usa en ESC-11, 12, 14, 15, 16, 22 y 24; los acercamientos de ESC-01, 03, 04, 06, 08, 09, 21 y 23 mostraban logos de otras marcas y quedaron fuera del catálogo.

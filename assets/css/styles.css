@@ -1473,8 +1473,18 @@ body.has-brand-intro {
   cursor: pointer;
 }
 
+.gallery-count {
+  display: grid;
+  place-items: center;
+  min-width: 52px;
+  background: var(--cream);
+  color: var(--wine);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
 .dialog-info {
-  align-self: center;
+  align-self: safe center;
   padding: 70px 54px 48px;
 }
 
@@ -3155,3 +3165,19 @@ body.has-brand-intro {
     transform: none;
   }
 }
+
+.dialog-gallery { position: relative; }
+.gallery-note {
+  position: absolute;
+  z-index: 2;
+  left: 14px;
+  bottom: 18px;
+  max-width: calc(100% - 200px);
+  margin: 0;
+  padding: 6px 10px;
+  background: rgba(255, 248, 243, .92);
+  color: var(--wine);
+  font-size: 11px;
+  font-weight: 600;
+}
+.gallery-note[hidden] { display: none; }
