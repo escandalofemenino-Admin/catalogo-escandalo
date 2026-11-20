@@ -220,7 +220,7 @@
       <article class="product-card product-card--v2" data-line="${product.linea}" data-code="${product.codigo}">
         <button class="product-media" type="button" data-open="${product.codigo}" aria-label="Ver detalles de ${product.nombre}">
           ${cardPicture(product.foto1, product.alt, "product-image--primary")}
-          ${cardPicture(product.foto2, `${product.alt}, vista de producto`, "product-image--secondary", true)}
+          ${cardPicture(product.foto3 || product.foto2, `${product.alt}, detalle de textura`, "product-image--secondary", true)}
           ${product.etiqueta ? `<span class="product-tag">${product.etiqueta}</span>` : ""}
           <span class="image-hint" aria-hidden="true">＋</span>
         </button>
