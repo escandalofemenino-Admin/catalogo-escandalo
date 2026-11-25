@@ -2900,3 +2900,19 @@ body.has-duo .floating-whatsapp, body.has-duo [data-whatsapp="button"] { bottom:
 @media (max-width: 520px) {
   .catalog-rebuild .card-duo small { display: block; font-size: 7.5px; letter-spacing: .04em; }
 }
+
+/* Pedido de varias prendas: resumen compacto y detalle desplazable. */
+.duo-details summary { cursor: pointer; padding: 8px 0; font-size: 13px; text-decoration: underline; }
+.duo-chips { display: grid; max-height: min(35vh, 260px); overflow-y: auto; overscroll-behavior: contain; }
+.duo-chip { display: flex; justify-content: space-between; font-size: 13px; }
+.duo-chip small { display: block; }
+.duo-item-controls { display: flex; align-items: center; flex-shrink: 0; }
+.duo-chip button { width: 44px; height: 44px; font-size: 20px; }
+.duo-chip button:disabled { opacity: .35; cursor: default; }
+.duo-dock-copy small { font-size: 12px; line-height: 1.5; }
+.duo-dock :focus-visible { outline: 2px solid white; outline-offset: 2px; }
+@media (max-width: 600px) { .duo-dock { flex-direction: column; align-items: stretch; padding: 12px; bottom: max(8px, env(safe-area-inset-bottom)); } .duo-dock .button { font-size: 12px; } body.has-duo { padding-bottom: 200px; } }
+
+.order-estimate { font-size: 14px; line-height: 1.5; font-weight: 600; color: var(--wine); }
+.duo-chip > span { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 600px) { .duo-chip { flex-wrap: wrap; } .duo-item-controls { margin-left: auto; } }

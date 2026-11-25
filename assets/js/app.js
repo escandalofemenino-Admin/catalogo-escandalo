@@ -80,13 +80,17 @@
   }
 
   function productMessage(product, size, quantity) {
-    const total = product.precio == null ? "Por confirmar" : money(product.precio * quantity);
+    const subtotal = product.precio * quantity;
+    const discount = quantity >= 2 ? Math.round(subtotal * CONFIG.duoDiscount) : 0;
+    const total = product.precio == null ? "Por confirmar" : money(subtotal - discount);
     return `Hola, Escándalo 💋 Quiero pedir este look:\n\n` +
       `• ${product.nombre} (${product.codigo})\n` +
       `• Talla: ${size}\n` +
       `• Cantidad: ${quantity}\n` +
       `• Precio unitario: ${money(product.precio)}\n` +
-      `• Total estimado: ${total}\n\n` +
+      `• Subtotal: ${money(subtotal)}\n` +
+      (discount ? `• Descuento Dúo (10%): −${money(discount)}\n` : "") +
+      `• Total estimado: ${total}\n• Envío no incluido; se confirma por WhatsApp.\n\n` +
       `¿Está disponible? También quisiera confirmar el envío a mi ciudad y las formas de pago.`;
   }
 
@@ -233,8 +237,8 @@
             <button class="card-cta" type="button" data-open="${product.codigo}">
               <span>Ver y pedir</span><span class="card-cta-icon" aria-hidden="true"><svg class="kiss" viewBox="0 0 1230 789" aria-hidden="true" focusable="false"><use class="lip-up" href="#lab-up"/><use class="lip-low" href="#lab-low"/></svg></span>
             </button>
-            <button class="card-duo" type="button" data-card-duo="${product.codigo}" aria-label="Agregar ${product.nombre} a mi Dúo" title="Agregar a mi Dúo">
-              <span aria-hidden="true">＋</span><small>Dúo</small>
+            <button class="card-duo" type="button" data-card-duo="${product.codigo}" aria-label="Agregar ${product.nombre} a mi pedido" title="Agregar a mi pedido">
+              <span aria-hidden="true">＋</span><small>Agregar</small>
             </button>
           </div>
         </div>
@@ -246,7 +250,7 @@
   function loadDuo() {
     try {
       const saved = JSON.parse(sessionStorage.getItem("escandalo_duo_v1") || "[]");
-      duo.items = saved.filter((item) => findProduct(item.codigo)).slice(0, 2);
+      duo.items = saved.filter((item) => item && findProduct(item.codigo) && productSizes(findProduct(item.codigo)).includes(item.talla)).map((item) => ({ codigo: item.codigo, talla: item.talla, cantidad: Number.isInteger(item.cantidad) && item.cantidad > 0 ? item.cantidad : 1 }));
     } catch (_) {
       duo.items = [];
     }
@@ -262,17 +266,19 @@
 
   function duoTotals() {
     const products = duo.items.map((item) => findProduct(item.codigo));
-    const subtotal = products.reduce((sum, product) => sum + (product.precio || 0), 0);
-    const discount = duo.items.length === 2 ? Math.round(subtotal * CONFIG.duoDiscount) : 0;
-    return { products, subtotal, discount, total: subtotal - discount };
+    const subtotal = products.reduce((sum, product, i) => sum + (product.precio || 0) * duo.items[i].cantidad, 0);
+    const count = duo.items.reduce((sum, item) => sum + item.cantidad, 0);
+    const discount = count >= 2 ? Math.round(subtotal * CONFIG.duoDiscount) : 0;
+    return { products, count, subtotal, discount, total: subtotal - discount };
   }
 
-  function addToDuo(product, size) {
-    if (duo.items.length >= 2) duo.items.shift();
-    duo.items.push({ codigo: product.codigo, talla: size });
+  function addToDuo(product, size, quantity = 1) {
+    const existing = duo.items.find((item) => item.codigo === product.codigo && item.talla === size);
+    if (existing) existing.cantidad += quantity;
+    else duo.items.push({ codigo: product.codigo, talla: size, cantidad: quantity });
     saveDuo();
     renderDuo();
-    showToast(duo.items.length === 2 ? "¡Tu Dúo está listo! Pídelo con el 10%." : "Agregado. Elige una prenda más para tu Dúo.");
+    showToast(duoTotals().count >= 2 ? "Agregado. Tu pedido conserva el 10% de descuento." : "Agregado. Con una prenda más activas el 10%.");
   }
 
   function removeFromDuo(index) {
@@ -283,8 +289,8 @@
 
   function duoMessage() {
     const { products, subtotal, discount, total } = duoTotals();
-    const lines = products.map((product, i) => `• ${product.nombre} (${product.codigo}) · Talla ${duo.items[i].talla} · ${money(product.precio)}`).join("\n");
-    return `Hola, Escándalo 💋 Quiero pedir mi Dúo:\n\n${lines}\n\nSubtotal: ${money(subtotal)}\nDescuento Dúo (${Math.round(CONFIG.duoDiscount * 100)}%): −${money(discount)}\nTotal estimado: ${money(total)}\n\n¿Están disponibles? Quisiera confirmar envío y formas de pago.`;
+    const lines = products.map((product, i) => `• ${product.nombre} (${product.codigo}) · Talla ${duo.items[i].talla} · Cantidad: ${duo.items[i].cantidad} · ${money(product.precio)} c/u · ${money(product.precio * duo.items[i].cantidad)}`).join("\n");
+    return `Hola, Escándalo 💋 Quiero pedir:\n\n${lines}\n\nSubtotal: ${money(subtotal)}${discount ? `\nDescuento Dúo (${Math.round(CONFIG.duoDiscount * 100)}%): −${money(discount)}` : ""}\nTotal estimado: ${money(total)}\nEnvío no incluido; se confirma por WhatsApp.\n\n¿Están disponibles? Quisiera confirmar envío y formas de pago.`;
   }
 
   function renderDuo() {
@@ -293,9 +299,17 @@
       bar = document.createElement("aside");
       bar.id = "duoBar";
       bar.className = "duo-dock";
-      bar.setAttribute("aria-label", "Tu Dúo");
+      bar.setAttribute("aria-label", "Tu pedido");
       document.body.appendChild(bar);
       bar.addEventListener("click", (event) => {
+        const change = event.target.closest("[data-duo-change]");
+        if (change) {
+          const item = duo.items[Number(change.dataset.duoIndex)];
+          item.cantidad = Math.max(1, item.cantidad + Number(change.dataset.duoChange));
+          saveDuo();
+          renderDuo();
+          $(`[data-duo-index="${change.dataset.duoIndex}"][data-duo-change="${change.dataset.duoChange}"]`, bar)?.focus();
+        }
         const remove = event.target.closest("[data-duo-remove]");
         if (remove) removeFromDuo(Number(remove.dataset.duoRemove));
         if (event.target.closest("[data-duo-order]")) openWhatsApp(duoMessage());
@@ -306,15 +320,12 @@
       document.body.classList.remove("has-duo");
       return;
     }
-    const { products, total, discount } = duoTotals();
+    const expanded = $(".duo-details", bar)?.open;
+    const { products, count, subtotal, total, discount } = duoTotals();
     bar.hidden = false;
     document.body.classList.add("has-duo");
-    const chips = products.map((product, i) => `<span class="duo-chip">${product.nombre}<button type="button" data-duo-remove="${i}" aria-label="Quitar ${product.nombre}">×</button></span>`).join("");
-    bar.innerHTML = duo.items.length === 2
-      ? `<div class="duo-dock-copy"><strong>Tu Dúo · ${money(total)}</strong><small>Ahorras ${money(discount)}</small><div class="duo-chips">${chips}</div></div>
-         <button class="button button--pink" type="button" data-duo-order>Pedir mi Dúo <span aria-hidden="true">↗</span></button>`
-      : `<div class="duo-dock-copy"><strong>Tu Dúo · 1 de 2</strong><small>Elige otra prenda y llévalas con ${Math.round(CONFIG.duoDiscount * 100)}%</small><div class="duo-chips">${chips}</div></div>
-         <a class="button button--outline-cream" href="#productos">Elegir otra</a>`;
+    const chips = products.map((product, i) => `<div class="duo-chip"><span>${product.nombre}<small>Talla ${duo.items[i].talla} · ${money(product.precio)} c/u</small></span><div class="duo-item-controls"><button type="button" data-duo-index="${i}" data-duo-change="-1" aria-label="Restar ${product.nombre}" ${duo.items[i].cantidad === 1 ? "disabled" : ""}>−</button><span>${duo.items[i].cantidad}</span><button type="button" data-duo-index="${i}" data-duo-change="1" aria-label="Sumar ${product.nombre}">+</button><button type="button" data-duo-remove="${i}" aria-label="Quitar ${product.nombre}">×</button></div></div>`).join("");
+    bar.innerHTML = `<div class="duo-dock-copy"><strong aria-live="polite">Tu pedido · ${count} ${count === 1 ? "prenda" : "prendas"} · ${money(total)}</strong><small>${discount ? `Subtotal ${money(subtotal)} · Ahorras ${money(discount)} (10%)` : "Agrega otra prenda y activa el 10%"}</small><details class="duo-details" ${expanded ? "open" : ""}><summary>Revisar y editar pedido</summary><div class="duo-chips">${chips}</div></details><small>Envío y disponibilidad se confirman por WhatsApp.</small></div><button class="button button--pink" type="button" data-duo-order>Pedir por WhatsApp <span aria-hidden="true">↗</span></button>`;
   }
 
   function findProduct(code) {
@@ -451,6 +462,12 @@
     const output = $("[data-quantity-value]", picker);
     const next = Math.min(9, Math.max(1, Number(output.textContent) + Number(button.dataset.quantityChange)));
     output.textContent = String(next);
+    const summary = $("[data-order-estimate]", button.closest("#dialogContent") || document);
+    if (summary) {
+      const subtotal = Number(summary.dataset.unitPrice) * next;
+      const discount = next >= 2 ? Math.round(subtotal * CONFIG.duoDiscount) : 0;
+      summary.textContent = `Total de este look: ${money(subtotal - discount)}${discount ? ` · Ahorras ${money(discount)} (10%)` : " · 10% desde 2 prendas"}. Envío no incluido.`;
+    }
   }
 
   function openProduct(code, focusSize = false) {
@@ -484,12 +501,13 @@
           <div class="dialog-purchase-options">
             ${sizePicker(product)}
             ${quantityPicker()}
+            <p class="order-estimate" data-order-estimate data-unit-price="${product.precio}" aria-live="polite">Total de este look: ${money(product.precio)} · 10% desde 2 prendas. Envío no incluido.</p>
           </div>
           <div class="dialog-actions">
             <button class="button button--wine button--wide order-button order-button--dialog" type="button" data-dialog-buy>
-              <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.08 4.85 4.85 0 0 0 1.02 2.58c.12.16 1.77 2.7 4.29 3.79 1.6.69 2.22.75 3.02.63.49-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>Pedir por WhatsApp</span><span class="order-button-icon" aria-hidden="true"><svg class="kiss" viewBox="0 0 1230 789" aria-hidden="true" focusable="false"><use class="lip-up" href="#lab-up"/><use class="lip-low" href="#lab-low"/></svg></span>
+              <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.08 4.85 4.85 0 0 0 1.02 2.58c.12.16 1.77 2.7 4.29 3.79 1.6.69 2.22.75 3.02.63.49-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>Pedir este look</span><span class="order-button-icon" aria-hidden="true"><svg class="kiss" viewBox="0 0 1230 789" aria-hidden="true" focusable="false"><use class="lip-up" href="#lab-up"/><use class="lip-low" href="#lab-low"/></svg></span>
             </button>
-            <button class="button button--outline-wine button--wide dialog-duo-add" type="button" data-dialog-duo>＋ Agregar a mi Dúo <small>(2 prendas con ${Math.round(CONFIG.duoDiscount * 100)}%)</small></button>
+            <button class="button button--outline-wine button--wide dialog-duo-add" type="button" data-dialog-duo>＋ Agregar a mi pedido <small>(10% desde 2 prendas)</small></button>
             <button class="size-guide-button" type="button" data-size-guide>Ver guía de tallas</button>
           </div>
           <picture class="size-guide" hidden>
@@ -532,12 +550,12 @@
       const selected = $('input[name="product-size"]:checked', content);
       const error = $(".size-error", content);
       if (!selected) {
-        error.textContent = "Elige una talla para agregarla a tu Dúo.";
+        error.textContent = "Elige una talla para agregarla a tu pedido.";
         $('input[name="product-size"]', content)?.focus();
         return;
       }
       error.textContent = "";
-      addToDuo(product, selected.value);
+      addToDuo(product, selected.value, quantityValue(content));
       dialog.close();
     });
     $$('.size-options input', content).forEach((input) => {
