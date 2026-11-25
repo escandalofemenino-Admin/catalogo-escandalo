@@ -308,10 +308,14 @@
           item.cantidad = Math.max(1, item.cantidad + Number(change.dataset.duoChange));
           saveDuo();
           renderDuo();
-          $(`[data-duo-index="${change.dataset.duoIndex}"][data-duo-change="${change.dataset.duoChange}"]`, bar)?.focus();
+          const direction = item.cantidad === 1 ? "1" : change.dataset.duoChange;
+          $(`[data-duo-index="${change.dataset.duoIndex}"][data-duo-change="${direction}"]`, bar)?.focus();
         }
         const remove = event.target.closest("[data-duo-remove]");
-        if (remove) removeFromDuo(Number(remove.dataset.duoRemove));
+        if (remove) {
+          removeFromDuo(Number(remove.dataset.duoRemove));
+          (duo.items.length ? $(".duo-details summary", bar) : $("[data-card-duo]"))?.focus();
+        }
         if (event.target.closest("[data-duo-order]")) openWhatsApp(duoMessage());
       });
     }

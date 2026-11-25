@@ -2916,3 +2916,13 @@ body.has-duo .floating-whatsapp, body.has-duo [data-whatsapp="button"] { bottom:
 .order-estimate { font-size: 14px; line-height: 1.5; font-weight: 600; color: var(--wine); }
 .duo-chip > span { min-width: 0; overflow-wrap: anywhere; }
 @media (max-width: 600px) { .duo-chip { flex-wrap: wrap; } .duo-item-controls { margin-left: auto; } }
+
+/* Controles legibles sin desbordamiento en tarjetas estrechas. */
+.catalog-rebuild .card-duo { width: 60px; min-width: 60px; flex-shrink: 0; border-radius: 16px; }
+.catalog-rebuild .card-duo small { display: block; font-size: 9px; letter-spacing: 0; }
+.duo-dock { max-height: calc(100dvh - 28px); overflow-y: auto; }
+@media (min-width: 601px) { body.has-duo { padding-bottom: 140px; } }
+
+@media (max-width: 520px) { .catalog-rebuild .card-actions { grid-template-columns: minmax(0, 1fr); } .catalog-rebuild .card-duo { width: 100%; min-height: 44px; grid-auto-flow: column; justify-content: center; gap: 6px; border-radius: 999px; } .catalog-rebuild .card-duo small { font-size: 10px; } }
+
+@media (max-width: 360px) { .catalog-rebuild .card-cta { font-size: 9px; padding-left: 8px; gap: 4px; letter-spacing: 0; } .catalog-rebuild .card-cta-icon { width: 24px; height: 24px; padding: 0; flex-shrink: 0; } }
