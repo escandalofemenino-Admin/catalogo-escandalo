@@ -1,0 +1,154 @@
+/* Alianza Escándalo × Gafas Paisas: acceso al probador de GP */
+.gp-partner {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: clamp(14px, 2.25vw, 28px) clamp(12px, 4vw, 58px) 0;
+}
+
+.gp-partner__link {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px clamp(16px, 2.5vw, 38px);
+  min-height: 96px;
+  padding: 16px clamp(16px, 2.25vw, 30px);
+  overflow: hidden;
+  border: 1px solid #15396d;
+  border-radius: 18px;
+  background: radial-gradient(ellipse at 82% 170%, #0756b7, transparent 70%), #06162f;
+  color: #fff;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.gp-partner__link:hover {
+  border-color: #0b5fdb;
+  box-shadow: 0 14px 30px rgba(6, 22, 47, .22);
+  transform: translateY(-2px);
+}
+
+.gp-partner__link:active { transform: translateY(0) scale(.995); }
+
+.gp-partner__link:focus-visible {
+  outline: 3px solid #ff684f;
+  outline-offset: 3px;
+}
+
+.gp-partner__brand { display: block; }
+
+.gp-partner__logo {
+  display: block;
+  width: clamp(92px, 11vw, 140px);
+  height: auto;
+}
+
+.gp-partner__copy {
+  display: grid;
+  gap: 3px;
+  padding-inline-start: clamp(12px, 2.2vw, 30px);
+  border-inline-start: 1px solid rgba(255, 255, 255, .25);
+  color: #c9dcf7;
+  font-size: .9rem;
+  line-height: 1.4;
+}
+
+.gp-partner__collab {
+  color: #8fb6ec;
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+.gp-partner__copy strong {
+  color: #fff;
+  font-size: clamp(1.15rem, 2.1vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.gp-partner__action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 20px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ff684f;
+  color: #06162f;
+  font-size: .95rem;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: background-color .2s ease;
+}
+
+.gp-partner__action svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  transition: transform .2s ease;
+}
+
+/* Reflejo de lente: una sola pasada sobre el botón al señalar el bloque. */
+.gp-partner__action::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -60%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent);
+  transform: skewX(-18deg) translateX(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gp-partner__link:hover .gp-partner__action,
+.gp-partner__link:focus-visible .gp-partner__action { background: #ff8670; }
+
+.gp-partner__link:hover .gp-partner__action svg,
+.gp-partner__link:focus-visible .gp-partner__action svg { transform: translate(2px, -2px); }
+
+.gp-partner__link:hover .gp-partner__action::after,
+.gp-partner__link:focus-visible .gp-partner__action::after {
+  animation: gp-glint .7s ease forwards;
+}
+
+@keyframes gp-glint {
+  0% { opacity: 0; transform: skewX(-18deg) translateX(0); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: skewX(-18deg) translateX(420%); }
+}
+
+@media (max-width: 600px) {
+  .gp-partner__link {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .gp-partner__logo { width: 84px; }
+
+  .gp-partner__copy {
+    padding-inline-start: 14px;
+    font-size: .85rem;
+  }
+
+  .gp-partner__action {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+@media (hover: none) {
+  .gp-partner__link:hover { transform: none; box-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gp-partner__link,
+  .gp-partner__action,
+  .gp-partner__action svg { transition: none; }
+  .gp-partner__link:hover { transform: none; }
+  .gp-partner__action::after { display: none; }
+}
